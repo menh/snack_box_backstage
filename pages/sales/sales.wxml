@@ -28,14 +28,14 @@
 
   <view class='sales-good'>
 
-    <view class='sales-good-item' wx:for="{{data.item}}" wx:for-item="snack_item" wx:key="{{index}}">
+    <view class='sales-good-item' wx:for="{{data}}" wx:for-item="snack_item" wx:key="{{index}}">
 
       <image class='sales-good-item-img' src='{{snack_item.goodPic}}'></image>
       <view class='sales-good-item-property'>
         <view class='sales-good-item-property-goodName'>{{snack_item.goodName}}</view>
         <view class='sales-good-item-property-price'>￥{{snack_item.price}}/{{snack_item.goodUnit}}</view>
       </view>
-      <view class='sales-good-item-orderNum' type="default">{{snack_item.orderNum}}</view>
+      <view class='sales-good-item-orderNum' type="default">{{snack_item.saleNum}}</view>
 
     </view>
 

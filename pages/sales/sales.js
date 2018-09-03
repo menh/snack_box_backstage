@@ -83,8 +83,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {},
-
+  onLoad: function(options) {
+    var items =[] ;
+    const self = this;
+    items = this.getSnackOrderSaleNum('2018/09/01','2018/09/04');
+    this.getSnackOrderGoodCount('2018/09/01', '2018/09/04');
+  },
+    
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -94,7 +99,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
   },
 
   /**
@@ -140,5 +144,53 @@ Page({
 
     }
   },
+
+  getSnackOrderSaleNum: function(beginDate,endDate){
+    const self = this;
+    wx.request({
+      url: app.globalData.serverIp + 'getSnackOrderSaleNum.do',
+      data: {
+        beginDate: beginDate,
+        endDate: endDate
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log("succ");
+        console.log(res.data);
+        self.setData({
+          data: res.data
+        })
+        return res.data;
+      },
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
+  },
+
+  getSnackOrderGoodCount: function (beginDate, endDate) {
+    const self = this;
+    wx.request({
+      url: app.globalData.serverIp + 'getSnackOrderGoodCount.do',
+      data: {
+        beginDate: beginDate,
+        endDate: endDate
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res.data);
+        return res.data;
+      },
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
+  }
 
 })
