@@ -1,0 +1,28 @@
+{
+  "pages": [
+    "pages/sales/sales",
+    "pages/openid/openid"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#CF5500",
+    "navigationBarTitleText": "宅宅快乐盒后台",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#CDCDCD",
+    "selectedColor": "#FFFFFF",
+    "backgroundColor": "#CF5500",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/sales/sales",
+        "text": "销售情况"
+      },
+      {
+        "pagePath": "pages/openid/openid",
+        "text": "获取id"
+      }
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+<view class='id'>
+  <button class='id-get' type="warn" bindtap='getId_tap'>点击复制 openId</button>
+  <view class='id-show'>{{openid}}</view>
+</view>

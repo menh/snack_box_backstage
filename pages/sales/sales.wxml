@@ -1,0 +1,44 @@
+<scroll-view class='sales'>
+  <view class='sales-title'>
+    <view class='sales-title-category'>
+      <view class="sales-title-category-title{{navActive === '0' ? '-choose':''}}" data-index="0" catchtap='chooseTime'>今日</view>
+      <view class="sales-title-category-title{{navActive === '1' ? '-choose':''}}" data-index="1" catchtap='chooseTime'>昨日</view>
+      <view class="sales-title-category-title{{navActive === '2' ? '-choose':''}}" data-index="2" catchtap='chooseTime'>本月</view>
+    </view>
+
+    <view class='sales-title-data'>
+      <view class='sales-title-data-class'>
+        <view class='sales-title-data-class-data'>{{data.orderNum}}</view>
+        <view class='sales-title-data-class-title'>销售件数</view>
+      </view>
+      <view class='sales-title-data-class'>
+        <view class='sales-title-data-class-data'>￥{{data.sales}}</view>
+        <view class='sales-title-data-class-title'>销售总额</view>
+      </view>
+      <view class='sales-title-data-class'>
+        <view class='sales-title-data-class-data'>{{data.activeUser}}</view>
+        <view class='sales-title-data-class-title'>活跃用户</view>
+      </view>
+      <view class='sales-title-data-class'>
+        <view class='sales-title-data-class-data'>{{data.activeBox}}</view>
+        <view class='sales-title-data-class-title'>活跃盒子</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='sales-good'>
+
+    <view class='sales-good-item' wx:for="{{data.item}}" wx:for-item="snack_item" wx:key="{{index}}">
+
+      <image class='sales-good-item-img' src='{{snack_item.goodPic}}'></image>
+      <view class='sales-good-item-property'>
+        <view class='sales-good-item-property-goodName'>{{snack_item.goodName}}</view>
+        <view class='sales-good-item-property-price'>￥{{snack_item.price}}/{{snack_item.goodUnit}}</view>
+      </view>
+      <view class='sales-good-item-orderNum' type="default">{{snack_item.orderNum}}</view>
+
+    </view>
+
+  </view>
+
+</scroll-view>
