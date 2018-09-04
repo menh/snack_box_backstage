@@ -8,19 +8,19 @@
 
     <view class='sales-title-data'>
       <view class='sales-title-data-class'>
-        <view class='sales-title-data-class-data'>{{data.orderNum}}</view>
+        <view class='sales-title-data-class-data'>{{countData.saleNum}}</view>
         <view class='sales-title-data-class-title'>销售件数</view>
       </view>
       <view class='sales-title-data-class'>
-        <view class='sales-title-data-class-data'>￥{{data.sales}}</view>
+        <view class='sales-title-data-class-data'>￥{{countData.saleAmt}}</view>
         <view class='sales-title-data-class-title'>销售总额</view>
       </view>
       <view class='sales-title-data-class'>
-        <view class='sales-title-data-class-data'>{{data.activeUser}}</view>
+        <view class='sales-title-data-class-data'>{{countData.openidSum}}</view>
         <view class='sales-title-data-class-title'>活跃用户</view>
       </view>
       <view class='sales-title-data-class'>
-        <view class='sales-title-data-class-data'>{{data.activeBox}}</view>
+        <view class='sales-title-data-class-data'>{{countData.boxBsnSum}}</view>
         <view class='sales-title-data-class-title'>活跃盒子</view>
       </view>
     </view>

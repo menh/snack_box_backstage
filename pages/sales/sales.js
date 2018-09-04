@@ -8,11 +8,14 @@ Page({
 
   data: {
     navActive:'0',
-    data: {
+    countData: {
       orderNum: 22,
       sales: 33,
       activeBox: 12,
-      activeUser:14,
+      activeUser: 14,
+    },
+    data: {
+      
       item: [{
         goodName: '亲嘴烧',
         goodPic: '../../image/snack/food.png',
@@ -86,8 +89,10 @@ Page({
   onLoad: function(options) {
     var items =[] ;
     const self = this;
-    items = this.getSnackOrderSaleNum('2018/09/01','2018/09/04');
-    this.getSnackOrderGoodCount('2018/09/01', '2018/09/04');
+    items = this.getSnackOrderSaleNum('2018/09/04','2018/09/05');
+    this.getSnackOrderGoodCount('2018/09/04', '2018/09/05');
+    console.log('openid :'+wx.getStorageSync('openId'));
+    this.adminLoginIn(wx.getStorageSync('openId'));
   },
     
   /**
@@ -185,12 +190,34 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
+        self.setData({
+          countData : res.data
+        })
         return res.data;
       },
       fail: function (res) {
         console.log("faile");
       }
     })
-  }
+  },
 
+  adminLoginIn: function (openid) {
+    const self = this;
+    wx.request({
+      url: app.globalData.serverIp + 'adminLoginIn.do',
+      data: {
+        openid: openid
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log("login in:"+res.data);
+      },
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
+  }
 })

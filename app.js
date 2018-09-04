@@ -59,6 +59,7 @@ App({
         //self.globalData.openid ="o9P4b5CcgFHTMNr5DxRfnibP-WIM";
         self.globalData.openid = res.data
         wx.setStorageSync('openId', res.data)
+        self.globalData.openid = res.data;
        // self.getCustomerId();
         // self.unifiedorder(res);
       },
