@@ -85,8 +85,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // this.getSnackOrderSaleNum('2018/09/03','2018/09/06');
-    // this.getSnackOrderGoodCount('2018/09/03', '2018/09/05');
+   //this.getSnackOrderSaleNum('2018/09/03','2018/09/06');
+   //this.getSnackOrderGoodCount('2018/09/03', '2018/09/05');
   },
 
   /**
@@ -94,6 +94,7 @@ Page({
    */
   onReady: function() {
     this.getSnackOrderSaleNum(0);
+    
   },
 
   /**
@@ -184,7 +185,6 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function(res) {
-        console.log(res.data);
         self.setData({
           data: res.data
         })
@@ -215,6 +215,10 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function(res) {
+        self.setData({
+          countData : res.data
+        })
+        console.log(res.data);
         console.log('count:' + res.data);
       },
       fail: function(res) {
