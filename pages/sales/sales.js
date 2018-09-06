@@ -9,67 +9,7 @@ Page({
   data: {
     navActive: '0',
     data:{},
-    // data: {
-    //   orderNum: 22,
-    //   sales: 33,
-    //   activeBox: 12,
-    //   activeUser: 14,
-    //   item: [{
-    //     goodName: '亲嘴烧',
-    //     goodPic: '../../image/snack/food.png',
-    //     price: 18.8,
-    //     goodUnit: "份",
-    //     orderNum: 1
-    //   }, {
-    //     goodName: '亲嘴烧',
-    //     goodPic: '../../image/snack/food.png',
-    //     price: 18.8,
-    //     goodUnit: "份",
-    //     orderNum: 2
-    //   }, {
-    //     goodName: '亲嘴烧',
-    //     goodPic: '../../image/snack/food.png',
-    //     price: 18.8,
-    //     goodUnit: "份",
-    //     orderNum: 3
-    //   }, {
-    //     goodName: '亲嘴烧',
-    //     goodPic: '../../image/snack/food.png',
-    //     price: 18.8,
-    //     goodUnit: "份",
-    //     orderNum: 4
-    //   }, {
-    //     goodName: '亲嘴烧',
-    //     goodPic: '../../image/snack/food.png',
-    //     price: 18.8,
-    //     goodUnit: "份",
-    //     orderNum: 5
-    //   }, {
-    //     goodName: '亲嘴烧',
-    //     goodPic: '../../image/snack/food.png',
-    //     price: 18.8,
-    //     goodUnit: "份",
-    //     orderNum: 6
-    //   }, {
-    //     goodName: '亲嘴烧',
-    //     goodPic: '../../image/snack/food.png',
-    //     price: 18.8,
-    //     goodUnit: "份",
-    //     orderNum: 7
-    //   }, {
-    //     goodName: '亲嘴烧',
-    //     goodPic: '../../image/snack/food.png',
-    //     price: 18.8,
-    //     goodUnit: "份",
-    //     orderNum: 8
-    //   }, {
-    //     goodName: '亲嘴烧',
-    //     goodPic: '../../image/snack/food.png',
-    //     price: 18.8,
-    //     goodUnit: "份",
-    //     orderNum: 9
-    //   }]
-    // },
+    countData:{},
     category: [{
       categoryName: "早餐面包",
       categoryItem: [{
@@ -94,6 +34,7 @@ Page({
    */
   onReady: function() {
     this.getSnackOrderSaleNum(0);
+    this.getSnackOrderGoodCount(0);
     
   },
 
@@ -136,7 +77,9 @@ Page({
     });
 
 
-      this.getSnackOrderSaleNum(index);
+    this.getSnackOrderSaleNum(index);
+    this.getSnackOrderGoodCount(index);
+      
 
   },
 
@@ -202,8 +145,39 @@ Page({
     return n[1] ? n : '0' + n
   },
 
-  getSnackOrderGoodCount: function(beginDate, endDate) {
+  getSnackOrderGoodCount: function (index) {
     const self = this;
+
+    this.setData({
+      data: {},
+    });
+
+    wx.showToast({
+      title: '',
+      icon: "loading",
+      duration: 5000
+    })
+
+    var year = new Date().getFullYear()
+    var month = new Date().getMonth() + 1
+    var day = new Date().getDate()
+
+    if (index == '0') {
+      console.log("今日");
+      var beginDate = [year, month, day].map(this.formatNumber).join('/');
+      var endDate = [year, month, day + 1].map(this.formatNumber).join('/');
+
+    } else if (index == '1') {
+      console.log("昨日");
+      var beginDate = [year, month, day - 1].map(this.formatNumber).join('/');
+      var endDate = [year, month, day].map(this.formatNumber).join('/');
+
+    } else {
+      console.log("本月");
+      var beginDate = [year, month, 1].map(this.formatNumber).join('/');
+      var endDate = [year, month, day + 1].map(this.formatNumber).join('/');
+    }
+    
     wx.request({
       url: app.globalData.serverIp + 'getSnackOrderGoodCount.do',
       data: {
