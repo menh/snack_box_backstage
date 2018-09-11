@@ -1,0 +1,39 @@
+<scroll-view class='good'>
+  <view class='good-title'>
+    <view class="good-title-cate{{navActive === '0' ? '-choose':''}}" data-index="0" catchtap='chooseCate'>类别管理</view>
+    <view class="good-title-cate{{navActive === '1' ? '-choose':''}}" data-index="1" catchtap='chooseCate'>商品管理</view>
+  </view>
+
+  <view class='good-text' wx:if="{{navActive=='0'}}">
+    <view class='gooe-text-head'>
+      <view class='gooe-text-head-name'>标签</view>
+      <view class='gooe-text-head-name'>类别</view>
+      <view class='gooe-text-head-name'>总量</view>
+      <view class='gooe-text-head-name'>优先</view>
+      <view class='gooe-text-head-name'>显示</view>
+      <view class='gooe-text-head-name'>操作</view>
+    </view>
+
+    <view class='good-text-cate' wx:for="{{cate}}" wx:for-item="cate_item" wx:key="{{index}}">
+      <view class='good-text-cate-content'>{{cate_item.id}}</view>
+      <view class='good-text-cate-content'>{{cate_item.name}}</view>
+      <view class='good-text-cate-content'>{{cate_item.sum}}</view>
+      <view class='good-text-cate-content'>{{cate_item.priority}}</view>
+      <view class='good-text-cate-content'>{{cate_item.display}}</view>
+      <view class='good-text-cate-content'>
+        <view class='good-text-cate-content-button' style='background-color:green'>编辑</view>
+        <view class='good-text-cate-content-button' style='background-color:red '>删除</view>
+      </view>
+    </view>
+
+    <view class='good-text-cate'>
+      <image class='good-text-cate-add' src='/image/add.png' bindtap='navigator_cate_add'></image>
+    </view>
+
+  </view>
+  <view wx:elif="{{navActive=='1'}}">
+    <view>商品管理</view>
+  </view>
+
+
+</scroll-view>

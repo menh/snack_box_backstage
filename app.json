@@ -1,8 +1,14 @@
 {
   "pages": [
     "pages/sales/sales",
-    "pages/openid/openid"
+    "pages/openid/openid",
+    "pages/good/cate_add/cate_add",
+    "pages/good/cate_edit/cate_edit",
+    "pages/good/good_add/good_add",
+    "pages/good/good_edit/good_edit",
+    "pages/good/good_page/good_page"
   ],
+  
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#CF5500",
@@ -18,6 +24,10 @@
       {
         "pagePath": "pages/sales/sales",
         "text": "销售情况"
+      },
+      {
+        "pagePath": "pages/good/good_page/good_page",
+        "text": "商品管理"
       },
       {
         "pagePath": "pages/openid/openid",

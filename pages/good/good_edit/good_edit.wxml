@@ -1,0 +1,21 @@
+<view class='page'>
+  <view class="page-section">
+    <view class="page-section-title">目录名</view>
+    <input class="page-section-input" name="input" placeholder="目录名"></input>
+  </view>
+
+  <view class="page-section">
+    <view class="page-section-title">优先</view>
+    <input class="page-section-input" name="input"  type="number" placeholder="优先级"></input>
+  </view>
+
+  <view class="page-section">
+    <view class="page-section-title">是否显示</view>
+    <radio-group class='page-section-radio' name="radio">
+      <radio value="radio1">显示</radio>
+      <radio value="radio2">隐藏</radio>
+    </radio-group>
+  </view>
+
+  <button class="page-submit" type="primary">提交</button>
+</view>

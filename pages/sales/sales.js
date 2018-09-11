@@ -10,15 +10,6 @@ Page({
     navActive: '0',
     data:{},
     countData:{},
-    category: [{
-      categoryName: "早餐面包",
-      categoryItem: [{
-        goodName: '亲嘴烧',
-        img: '../../image/snack/food.png',
-        price: 18.8,
-        goodUnit: "份"
-      }]
-    }]
   },
 
   /**
