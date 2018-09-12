@@ -1,12 +1,10 @@
 {
   "pages": [
+    "pages/commodity/home/home",
     "pages/sales/sales",
     "pages/openid/openid",
-    "pages/good/cate_add/cate_add",
-    "pages/good/cate_edit/cate_edit",
-    "pages/good/good_add/good_add",
-    "pages/good/good_edit/good_edit",
-    "pages/good/good_page/good_page"
+    "pages/commodity/cate_edit/cate_edit",
+    "pages/commodity/good_edit/good_edit"
   ],
   
   "window": {
@@ -26,7 +24,7 @@
         "text": "销售情况"
       },
       {
-        "pagePath": "pages/good/good_page/good_page",
+        "pagePath": "pages/commodity/home/home",
         "text": "商品管理"
       },
       {

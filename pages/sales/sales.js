@@ -85,7 +85,7 @@ Page({
     wx.showToast({
       title: '',
       icon: "loading",
-      duration: 5000
+      duration: 50000
     })
 
     var year = new Date().getFullYear()
@@ -140,7 +140,7 @@ Page({
     const self = this;
 
     this.setData({
-      data: {},
+      countData: {},
     });
 
     wx.showToast({

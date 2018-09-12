@@ -1,0 +1,67 @@
+<scroll-view class='home'>
+  <view class='home-title'>
+    <view class="home-title-cate{{navActive === '0' ? '-choose':''}}" data-index="0" catchtap='chooseCate'>类别管理</view>
+    <view class="home-title-cate{{navActive === '1' ? '-choose':''}}" data-index="1" catchtap='chooseCate'>商品管理</view>
+  </view>
+
+  <view class='home-cate' wx:if="{{navActive=='0'}}">
+    <view class='home-cate-head'>
+      <view class='home-cate-head-name'>类别</view>
+      <view class='home-cate-head-name'>总量</view>
+      <view class='home-cate-head-name'>优先</view>
+      <view class='home-cate-head-name'>显示</view>
+      <view class='home-cate-head-name'>操作</view>
+    </view>
+    <view class='home-cate-item' wx:for="{{cate}}" wx:for-item="cate_item" wx:key="{{index}}">
+      <view class='home-cate-item-content'>{{cate_item.name}}</view>
+      <view class='home-cate-item-content'>{{cate_item.sum}}</view>
+      <view class='home-cate-item-content'>{{cate_item.priority}}</view>
+      <view class='home-cate-item-content'>{{cate_item.display}}</view>
+      <view class='home-cate-item-content'>
+        <view class='home-cate-item-content-button' style='color:green' data-id='{{cate_item.id}}' data-name='{{cate_item.name}}' bindtap='cate_edit'>编辑</view>
+        <view class='home-cate-item-content-button' style='color:red ' data-id='{{cate_item.id}}' data-name='{{cate_item.name}}' bindtap='cate_delete'>删除</view>
+      </view>
+    </view>
+    <view class='home-cate-item'>
+      <image class='home-cate-item-add' src='/image/add.png' bindtap='cate_add'></image>
+    </view>
+  </view>
+
+  <view class='home-good' wx:elif="{{navActive=='1'}}">
+
+
+    <view class='home-good-item' wx:for="{{good}}" wx:for-item="snack_item" wx:key="{{index}}">
+
+      <image class='home-good-item-img' src='{{snack_item.goodPic}}'></image>
+      <view class='home-good-item-property'>
+        <view class='home-good-item-property-goodName'>{{snack_item.goodName}}</view>
+        <view class='home-good-item-property-price'>￥{{snack_item.price}}/{{snack_item.goodUnit}}</view>
+      </view>
+      <view class='home-good-item-property2'>
+        <view class='home-good-item-property2-attribute'>目录:{{snack_item.categoryName}}</view>
+        <view class='home-good-item-property2-attribute'>等级:{{snack_item.priority}}</view>
+        <view class='home-good-item-property2-attribute'>显示:{{snack_item.isDisplay}}</view>
+      </view>
+
+
+      <view class='home-good-item-operation'>
+        <view class='home-good-item-operation-button' style='color:green' data-id='{{cate_item.id}}' data-name='{{cate_item.name}}' bindtap='cate_edit'>编辑</view>
+        <view class='home-good-item-operation-button' style='color:red ' data-id='{{cate_item.id}}' data-name='{{cate_item.name}}' bindtap='cate_delete'>删除</view>
+      </view>
+
+    </view>
+
+    <view class='home-cate-item'>
+      <image class='home-cate-item-add' src='/image/add.png' bindtap='cate_add'></image>
+    </view>
+
+
+
+
+
+
+
+  </view>
+
+
+</scroll-view>
