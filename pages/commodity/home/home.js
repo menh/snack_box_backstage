@@ -143,7 +143,9 @@ Page({
   },
 
   cate_delete: function(e) {
+    const self = this;
     let id = e.currentTarget.dataset.id;
+    console.log(id);
     var name = e.currentTarget.dataset.name;
     wx.showModal({
       title: '您确定要删除"' + name + '"吗',
@@ -151,7 +153,7 @@ Page({
       success: function(res) {
         if (res.confirm) {
           console.log('用户点击确定');
-          
+          self.deleteCategory(id);
           //调用删除接口
           //刷新cate
         } else if (res.cancel) {
@@ -185,5 +187,28 @@ Page({
         console.log("faile");
       }
     })
-  }
+  },
+  deleteCategory: function (categoryId) {
+    var self = this;
+    wx.showLoading({
+      title: '正在载入'
+    })
+    wx.request({
+      url: app.globalData.serverIp + 'delCategory.do',
+      data: {
+        categoryId: categoryId
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res.data);
+        wx.hideLoading();
+      },
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
+  },
 })

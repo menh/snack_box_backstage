@@ -1,4 +1,6 @@
 // pages/good/good_add/good_add.js
+
+const app = getApp()
 Page({
 
   /**
@@ -125,16 +127,23 @@ Page({
 
   submit_cate_edit: function(e) {
     console.log(this.res);
+    const self = this;
     //加入改变目录数据的接口
     //res带着id，代表其为修改目录，若没有带着id，代表其为增加目录
     if (this.res.name != undefined && this.res.name != "" && this.res.priority != undefined && this.res.priority >= 0) {
-
+      var categoryId = this.res.id;
+      var categoryName = this.res.name;
+      var reorder = this.res.priority;
+      var valid = this.res.valid;
       wx.showModal({
         title: '请确认信息',
         content: JSON.stringify(this.res),
+
         success: function(res) {
+          
           if (res.confirm) {
             console.log('用户点击确定');
+            self.updCategory(categoryId, categoryName, reorder, valid);
             wx.navigateBack({
               delta: 1
             })
@@ -150,5 +159,31 @@ Page({
         icon: 'none'
       })
     }
+  },
+  updCategory: function (categoryId, categoryName, reorder, valid) {
+    var self = this;
+    wx.showLoading({
+      title: '正在载入'
+    })
+    wx.request({
+      url: app.globalData.serverIp + 'updCategory.do',
+      data: {
+        categoryId: categoryId,
+        categoryName: categoryName,
+        reorder: reorder,
+        valid: valid
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res.data);
+        wx.hideLoading();
+      },
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
   }
 })
