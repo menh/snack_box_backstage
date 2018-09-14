@@ -47,7 +47,10 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {},
+  onPullDownRefresh: function () {
+    this.getSnackOrderSaleNum(this.data.navActive);
+    this.getSnackOrderGoodCount(this.data.navActive);
+  },
 
   /**
    * 页面上拉触底事件的处理函数
@@ -70,8 +73,6 @@ Page({
 
     this.getSnackOrderSaleNum(index);
     this.getSnackOrderGoodCount(index);
-      
-
   },
 
 
@@ -92,20 +93,21 @@ Page({
     var month = new Date().getMonth() + 1
     var day = new Date().getDate()
 
+
     if (index == '0') {
-      console.log("今日");
       var beginDate = [year, month, day].map(this.formatNumber).join('/');
       var endDate = [year, month, day + 1].map(this.formatNumber).join('/');
 
     } else if (index == '1') {
-      console.log("昨日");
-      var beginDate = [year, month, day - 1].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day - 3].map(this.formatNumber).join('/');
       var endDate = [year, month, day].map(this.formatNumber).join('/');
 
+    } else if (index == '2') {
+      var beginDate = [year, month, day - 7].map(this.formatNumber).join('/');
+      var endDate = [year, month, day].map(this.formatNumber).join('/');
     } else {
-      console.log("本月");
-      var beginDate = [year, month, 1].map(this.formatNumber).join('/');
-      var endDate = [year, month, day + 1].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day - 30].map(this.formatNumber).join('/');
+      var endDate = [year, month, day+1].map(this.formatNumber).join('/');
     }
 
     wx.request({
@@ -122,6 +124,7 @@ Page({
         self.setData({
           data: res.data
         })
+        // wx.stopPullDownRefresh();
         wx.hideToast();
       },
       fail: function(res) {
@@ -154,19 +157,19 @@ Page({
     var day = new Date().getDate()
 
     if (index == '0') {
-      console.log("今日");
       var beginDate = [year, month, day].map(this.formatNumber).join('/');
       var endDate = [year, month, day + 1].map(this.formatNumber).join('/');
 
     } else if (index == '1') {
-      console.log("昨日");
-      var beginDate = [year, month, day - 1].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day - 3].map(this.formatNumber).join('/');
       var endDate = [year, month, day].map(this.formatNumber).join('/');
 
+    } else if (index == '2') {
+      var beginDate = [year, month, day - 7].map(this.formatNumber).join('/');
+      var endDate = [year, month, day].map(this.formatNumber).join('/');
     } else {
-      console.log("本月");
-      var beginDate = [year, month, 1].map(this.formatNumber).join('/');
-      var endDate = [year, month, day + 1].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day - 30].map(this.formatNumber).join('/');
+      var endDate = [year, month, day+1].map(this.formatNumber).join('/');
     }
     
     wx.request({

@@ -12,14 +12,16 @@
       <view class='home-cate-head-name'>显示</view>
       <view class='home-cate-head-name'>操作</view>
     </view>
+
     <view class='home-cate-item' wx:for="{{cate}}" wx:for-item="cate_item" wx:key="{{index}}">
-      <view class='home-cate-item-content'>{{cate_item.name}}</view>
-      <view class='home-cate-item-content'>{{cate_item.sum}}</view>
-      <view class='home-cate-item-content'>{{cate_item.priority}}</view>
-      <view class='home-cate-item-content'>{{cate_item.display}}</view>
+      <view class='home-cate-item-content'>{{cate_item.categoryName}}</view>
+      <view class='home-cate-item-content'>{{cate_item.goodSum}}</view>
+      <view class='home-cate-item-content'>{{cate_item.reorder}}</view>
+      <view class='home-cate-item-content'>{{cate_item.valid === "1"?'显示':'不'}}</view>
+
       <view class='home-cate-item-content'>
-        <view class='home-cate-item-content-button' style='color:green' data-id='{{cate_item.id}}' data-name='{{cate_item.name}}' bindtap='cate_edit'>编辑</view>
-        <view class='home-cate-item-content-button' style='color:red ' data-id='{{cate_item.id}}' data-name='{{cate_item.name}}' bindtap='cate_delete'>删除</view>
+        <view class='home-cate-item-content-button' style='color:green' data-id='{{cate_item.categoryId}}' data-name='{{cate_item.categoryName}}' bindtap='cate_edit'>编辑</view>
+        <view class='home-cate-item-content-button' style='color:red ' data-id='{{cate_item.categoryId}}' data-name='{{cate_item.categoryName}}' bindtap='cate_delete'>删除</view>
       </view>
     </view>
     <view class='home-cate-item'>
@@ -45,8 +47,8 @@
 
 
       <view class='home-good-item-operation'>
-        <view class='home-good-item-operation-button' style='color:green' data-id='{{cate_item.id}}' data-name='{{cate_item.name}}' bindtap='cate_edit'>编辑</view>
-        <view class='home-good-item-operation-button' style='color:red ' data-id='{{cate_item.id}}' data-name='{{cate_item.name}}' bindtap='cate_delete'>删除</view>
+        <view class='home-good-item-operation-button' style='color:green' data-id='{{snack_item.goodId}}' data-name='{{snack_item.goodName}}' bindtap='cate_edit'>编辑</view>
+        <view class='home-good-item-operation-button' style='color:red ' data-id='{{snack_item.goodId}}' data-name='{{snack_item.goodName}}' bindtap='cate_delete'>删除</view>
       </view>
 
     </view>

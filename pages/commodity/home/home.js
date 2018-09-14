@@ -1,38 +1,14 @@
 // pages/good/good.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    navActive: '1',
+    navActive: '0',
     //排序按照优先字段来
-    cate: [{
-      id: 'C00000001',
-      name: '面包饼干',
-      sum: 4,
-      priority: 1,
-      display: true
-    }, {
-      id: 'C00000002',
-      name: '方便食品',
-      sum: 4,
-      priority: 2,
-      display: true
-    }, {
-      id: 'C00000003',
-      name: '休闲零食',
-      sum: 12,
-      priority: 3,
-      display: true
-    }, {
-      id: 'C00000004',
-      name: '奶品饮料',
-      sum: 4,
-      priority: 4,
-      display: true
-    }],
-
+    cate:[],
 
     good: [{
         categoryId: "C00000001",
@@ -95,6 +71,8 @@ Page({
    */
   onReady: function() {
     //这里应该调用接口更新cate（目录）
+    this.getAllCate();
+    
   },
 
   /**
@@ -168,16 +146,43 @@ Page({
     let id = e.currentTarget.dataset.id;
     var name = e.currentTarget.dataset.name;
     wx.showModal({
-      title: '您确定要删除' + name + '吗',
+      title: '您确定要删除"' + name + '"吗',
       content: '该操作将会删除其下所有商品且无法撤回，请谨慎操作',
       success: function(res) {
         if (res.confirm) {
           console.log('用户点击确定');
+          
           //调用删除接口
           //刷新cate
         } else if (res.cancel) {
           console.log('用户点击取消');
         }
+      }
+    })
+  },
+
+  getAllCate:function(){
+    var self = this;
+    wx.showLoading({
+      title: '正在载入'
+    })
+    wx.request({
+      url: app.globalData.serverIp + 'getAllCategory.do',
+      data: {
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res.data);
+        self.setData({
+          cate:res.data
+        })
+        wx.hideLoading();
+      },
+      fail: function (res) {
+        console.log("faile");
       }
     })
   }

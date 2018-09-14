@@ -26,7 +26,7 @@ page{
 }
 
 .sales-title-category-title-choose{
-  width: 250rpx;
+  width: 187.5rpx;
   height: 100rpx;
   line-height: 100rpx;
   text-align: center;
@@ -36,7 +36,7 @@ page{
   font-weight: bold;
 }
 .sales-title-category-title{
-  width: 250rpx;
+  width: 187.5rpx;
   height: 100rpx;
   line-height: 100rpx;
   text-align: center;
