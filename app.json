@@ -1,12 +1,12 @@
 {
   "pages": [
+    "pages/user/user",
     "pages/commodity/home/home",
+    "pages/commodity/good_edit/good_edit",
     "pages/sales/sales",
     "pages/openid/openid",
-    "pages/commodity/cate_edit/cate_edit",
-    "pages/commodity/good_edit/good_edit"
+    "pages/commodity/cate_edit/cate_edit"
   ],
-  
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#CF5500",
@@ -28,10 +28,13 @@
         "text": "商品管理"
       },
       {
+        "pagePath": "pages/user/user",
+        "text": "用户管理"
+      },
+      {
         "pagePath": "pages/openid/openid",
         "text": "获取id"
       }
     ]
-
   }
 }

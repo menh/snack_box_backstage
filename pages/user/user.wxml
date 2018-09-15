@@ -1,0 +1,6 @@
+<scroll-view class='page'>
+  <view class='page-title'>
+    <view class="page-title-cate{{navActive === '0' ? '-choose':''}}" data-index="0" catchtap='chooseCate'>未处理分享</view>
+    <view class="page-title-cate{{navActive === '1' ? '-choose':''}}" data-index="1" catchtap='chooseCate'>全部分享</view>
+  </view>
+</scroll-view>

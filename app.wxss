@@ -26,6 +26,8 @@ button{
   border-color: lightgray;
   border-style: solid none ;
   border-width: 1rpx;
+  display: flex;
+
 }
 
 .page-submit{

@@ -70,15 +70,20 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    //这里应该调用接口更新cate（目录）
-    this.getAllCate();
     
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
+    //这里应该调用接口更新cate（目录）
+    this.setData({
+      cate:'',
+      good:'',
+    })
+    this.getAllCate();
+    this.getAllGood();
 
   },
 
@@ -134,26 +139,25 @@ Page({
     })
   },
 
-  cate_edit: function(e) {
-    let id = e.currentTarget.dataset.id;
-    var name = e.currentTarget.dataset.name;
+  cate_edit: function (e) {
+    let categoryIndex = e.currentTarget.dataset.index;
+    console.log(categoryIndex);
     wx.navigateTo({
-      url: "/pages/commodity/cate_edit/cate_edit?isEdit=true&id=" + id,
+      url: "/pages/commodity/cate_edit/cate_edit?isEdit=true&cateItem=" + JSON.stringify(this.data.cate[categoryIndex]),
     })
   },
 
   cate_delete: function(e) {
     const self = this;
-    let id = e.currentTarget.dataset.id;
-    console.log(id);
-    var name = e.currentTarget.dataset.name;
+    let index = e.currentTarget.dataset.index;
+    var cateItem = this.data.cate[index];
     wx.showModal({
-      title: '您确定要删除"' + name + '"吗',
+      title: '您确定要删除"' + cateItem.categoryName + '"吗',
       content: '该操作将会删除其下所有商品且无法撤回，请谨慎操作',
       success: function(res) {
         if (res.confirm) {
           console.log('用户点击确定');
-          self.deleteCategory(id);
+          self.deleteCategory(cateItem.categoryId);
           //调用删除接口
           //刷新cate
         } else if (res.cancel) {
@@ -163,7 +167,7 @@ Page({
     })
   },
 
-  getAllCate:function(){
+  getAllCate: function () {
     var self = this;
     wx.showLoading({
       title: '正在载入'
@@ -179,7 +183,7 @@ Page({
       success: function (res) {
         console.log(res.data);
         self.setData({
-          cate:res.data
+          cate: res.data
         })
         wx.hideLoading();
       },
@@ -188,6 +192,33 @@ Page({
       }
     })
   },
+
+  getAllGood: function () {
+    var self = this;
+    wx.showLoading({
+      title: '正在载入'
+    })
+    wx.request({
+      url: app.globalData.serverIp + 'getGoodList.do',
+      data: {
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res.data);
+        self.setData({
+          cate: res.data
+        })
+        wx.hideLoading();
+      },
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
+  },
+
   deleteCategory: function (categoryId) {
     var self = this;
     wx.showLoading({
@@ -205,6 +236,15 @@ Page({
       success: function (res) {
         console.log(res.data);
         wx.hideLoading();
+        if(res.data){
+          self.getAllCate()
+        }else{
+          wx.showModal({
+            title: '',
+            showCancel:false,
+            content: '请先删除该目录全部商品',
+          })
+        }
       },
       fail: function (res) {
         console.log("faile");

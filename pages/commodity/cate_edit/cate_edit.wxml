@@ -1,19 +1,19 @@
 <view class='page'>
   <view class="page-section">
     <view class="page-section-title">目录名</view>
-    <input class="page-section-input" name="input" placeholder="目录名" value='{{cate.name}}' bindinput="bindNameInput"></input>
+    <input class="page-section-input" name="input" placeholder="目录名" value='{{cate.categoryName}}' bindinput="bindCategoryNameInput"></input>
   </view>
 
   <view class="page-section">
     <view class="page-section-title">优先</view>
-    <input class="page-section-input" name="input" type="number" placeholder="优先级" value='{{cate.priority}}' bindinput="bindPriorityInput"></input>
+    <input class="page-section-input" name="input" type="number" placeholder="优先级" value='{{cate.reorder}}' bindinput="bindReorderInput"></input>
   </view>
 
   <view class="page-section">
     <view class="page-section-title">是否显示</view>
     <radio-group class='page-section-radio' name="radio" bindchange="bindDisplayChange">
-      <radio value="true" checked="{{cate.display}}">显示</radio>
-      <radio value="false" checked="{{!cate.display}}">隐藏</radio>
+      <radio value="1" checked="{{cate.valid==='1'?true:false}}">显示</radio>
+      <radio value="0" checked="{{cate.valid==='1'?false:true}}">隐藏</radio>
     </radio-group>
   </view>
 

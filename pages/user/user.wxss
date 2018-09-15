@@ -1,0 +1,41 @@
+/* pages/user/user.wxss */
+
+/* pages/box/box.wxss */
+
+page {
+  width: 100%;
+  height: 100%;
+  background-color: #f4f4f4;
+}
+
+.page {
+  width: 100%;
+}
+
+.page-title {
+  width: 100%;
+  height: 100rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.page-title-cate-choose {
+  width: 375rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: #cf5500;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.page-title-cate {
+  width: 375rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: #000;
+  font-size: 36rpx;
+  font-weight: bold;
+}

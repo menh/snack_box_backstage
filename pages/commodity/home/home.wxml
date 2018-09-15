@@ -17,11 +17,11 @@
       <view class='home-cate-item-content'>{{cate_item.categoryName}}</view>
       <view class='home-cate-item-content'>{{cate_item.goodSum}}</view>
       <view class='home-cate-item-content'>{{cate_item.reorder}}</view>
-      <view class='home-cate-item-content'>{{cate_item.valid === "1"?'显示':'不'}}</view>
+      <view class='home-cate-item-content'>{{cate_item.valid === "1"?'显示':'不显示'}}</view>
 
       <view class='home-cate-item-content'>
-        <view class='home-cate-item-content-button' style='color:green' data-id='{{cate_item.categoryId}}' data-name='{{cate_item.categoryName}}' bindtap='cate_edit'>编辑</view>
-        <view class='home-cate-item-content-button' style='color:red ' data-id='{{cate_item.categoryId}}' data-name='{{cate_item.categoryName}}' bindtap='cate_delete'>删除</view>
+        <view class='home-cate-item-content-button' style='color:green' data-index='{{index}}' bindtap='cate_edit'>编辑</view>
+        <view class='home-cate-item-content-button' style='color:red ' data-index='{{index}}' bindtap='cate_delete'>删除</view>
       </view>
     </view>
     <view class='home-cate-item'>

@@ -6,15 +6,14 @@ Page({
   /**
    * 页面的初始数据
    */
-  res: {
-    name: "",
-    priority: -1,
-    display: false,
-  },
 
 
   data: {
-    cate: {},
+    cate: {
+      categoryName: "",
+      reorder: 0,
+      valid: "0"
+    },
   },
 
   /**
@@ -22,8 +21,7 @@ Page({
    */
   onLoad: function(options) {
     var self = this;
-    var temp;
-    var id = options.id;
+
     var isEdit = options.isEdit;
     console.log(isEdit);
     //编辑
@@ -31,30 +29,17 @@ Page({
       wx.setNavigationBarTitle({
         title: '编辑目录'
       });
-      //调用接口获取该id的目录并赋值
-      temp = {
-        id: 'C00000001',
-        name: '面包饼干',
-        priority: 1,
-        display: true
-      };
+      console.log(JSON.parse(options.cateItem))
       self.setData({
-        cate: temp
+        cate: JSON.parse(options.cateItem)
       })
     } //添加
     else {
       wx.setNavigationBarTitle({
         title: '添加目录'
       });
-      temp = {
-        display: false
-      };
-      self.setData({
-        cate: temp
-      })
-    }
 
-    this.res = temp;
+    }
   },
 
   /**
@@ -106,47 +91,35 @@ Page({
 
   },
 
-  bindNameInput: function(e) {
-    var name = e.detail.value
-    this.res.name = name;
+  bindCategoryNameInput: function(e) {
+    var categoryName = e.detail.value
+    this.data.cate.categoryName = categoryName;
   },
 
-  bindPriorityInput: function(e) {
-    var priority = parseInt(e.detail.value)
-    this.res.priority = priority;
+  bindReorderInput: function(e) {
+    var reorder = parseInt(e.detail.value)
+    this.data.cate.reorder = reorder;
   },
 
   bindDisplayChange: function(e) {
     var temp = e.detail.value;
-    if (temp == "true") {
-      this.res.display = true;
-    } else {
-      this.res.display = false;
-    }
+    this.data.cate.valid = temp;
   },
 
   submit_cate_edit: function(e) {
-    console.log(this.res);
+    console.log(this.data.cate);
     const self = this;
-    //加入改变目录数据的接口
     //res带着id，代表其为修改目录，若没有带着id，代表其为增加目录
-    if (this.res.name != undefined && this.res.name != "" && this.res.priority != undefined && this.res.priority >= 0) {
-      var categoryId = this.res.id;
-      var categoryName = this.res.name;
-      var reorder = this.res.priority;
-      var valid = this.res.valid;
+    if ( this.data.cate.categoryName != "" && this.data.cate.reorder > 0) {
       wx.showModal({
         title: '请确认信息',
-        content: JSON.stringify(this.res),
+        content: JSON.stringify(this.data.cate),
 
         success: function(res) {
-          
+
           if (res.confirm) {
             console.log('用户点击确定');
-            self.updCategory(categoryId, categoryName, reorder, valid);
-            wx.navigateBack({
-              delta: 1
-            })
+            self.updCategory(self,self.data.cate);
             //调用接口
           } else if (res.cancel) {
             console.log('用户点击取消');
@@ -154,34 +127,38 @@ Page({
         }
       })
     } else {
-      wx.showToast({
-        title: '请填写全部目录信息',
-        icon: 'none'
+      wx.showModal({
+        content: '请填写全部目录信息',
+        showCancel:false
       })
     }
   },
-  updCategory: function (categoryId, categoryName, reorder, valid) {
-    var self = this;
+  updCategory: function(self,cate) {
+    // var self = this;
+    console.log("daozhele")
     wx.showLoading({
       title: '正在载入'
     })
     wx.request({
       url: app.globalData.serverIp + 'updCategory.do',
       data: {
-        categoryId: categoryId,
-        categoryName: categoryName,
-        reorder: reorder,
-        valid: valid
+        categoryId: cate.categoryId,
+        categoryName: cate.categoryName,
+        reorder: cate.reorder,
+        valid: cate.valid
       },
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         wx.hideLoading();
+        wx.navigateBack({
+          
+        })
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log("faile");
       }
     })
