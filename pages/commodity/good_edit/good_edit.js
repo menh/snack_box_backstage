@@ -132,5 +132,5 @@ Page({
       }
     }
     return res
-  },
+  }
 })

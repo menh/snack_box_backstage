@@ -63,7 +63,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.getAllGood();
+    this.updGood("G00000004");
+    this.delGood();
   },
 
   /**
@@ -246,6 +248,75 @@ Page({
             content: '请先删除该目录全部商品',
           })
         }
+      },
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
+  },
+  getAllGood: function () {
+    // var self = this;
+    wx.request({
+      url: app.globalData.serverIp + 'getAllGood.do',
+      data: {
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res.data);
+      },
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
+  },
+
+  updGood: function (good) {
+    // var self = this;
+    wx.request({
+      url: app.globalData.serverIp + 'updGood.do',
+      data: {
+        goodId: good.goodId, 
+        price: good.price,
+        salePrice: good.salePrice,
+        goodName: good.goodName,
+        goodPic: good.goodPic,
+        goodBrief: good.goodBrief,
+        saleVolume: good.saleVolume,
+        goodType: good.goodType,
+        goodUnit: good.goodUnit,
+        categoryId: good.categoryId,
+        valid: good.valid,
+        reorder: good.reorder
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res.data);
+      },
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
+  },
+
+  delGood: function (goodId) {
+    // var self = this;
+    wx.request({
+      url: app.globalData.serverIp + 'delGood.do',
+      data: {
+        goodId: goodId
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res.data);
       },
       fail: function (res) {
         console.log("faile");
