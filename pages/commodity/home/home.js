@@ -182,6 +182,7 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
+        console.log("category");
         self.setData({
           cate: res.data
         })

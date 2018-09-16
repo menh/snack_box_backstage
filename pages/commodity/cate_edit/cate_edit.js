@@ -11,7 +11,7 @@ Page({
   data: {
     cate: {
       categoryName: "",
-      reorder: 0,
+      reorder: 1,
       valid: "0"
     },
   },
@@ -110,7 +110,7 @@ Page({
     console.log(this.data.cate);
     const self = this;
     //res带着id，代表其为修改目录，若没有带着id，代表其为增加目录
-    if ( this.data.cate.categoryName != "" && this.data.cate.reorder > 0) {
+    if (this.data.cate.categoryName != "" && this.data.cate.reorder > 0) {
       wx.showModal({
         title: '请确认信息',
         content: JSON.stringify(this.data.cate),
@@ -136,6 +136,10 @@ Page({
   updCategory: function(self,cate) {
     // var self = this;
     console.log("daozhele")
+    console.log(cate.categoryId);
+    if (cate.categoryId == undefined){
+      cate.categoryId = '';
+    }
     wx.showLoading({
       title: '正在载入'
     })

@@ -15,7 +15,7 @@
 
     <view class='home-cate-item' wx:for="{{cate}}" wx:for-item="cate_item" wx:key="{{index}}">
       <view class='home-cate-item-content'>{{cate_item.categoryName}}</view>
-      <view class='home-cate-item-content'>{{cate_item.goodSum}}</view>
+      <view class='home-cate-item-content'>{{cate_item.goodNum}}</view>
       <view class='home-cate-item-content'>{{cate_item.reorder}}</view>
       <view class='home-cate-item-content'>{{cate_item.valid === "1"?'显示':'不显示'}}</view>
 
