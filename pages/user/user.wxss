@@ -39,3 +39,47 @@ page {
   font-size: 36rpx;
   font-weight: bold;
 }
+
+.page-cate {
+  width: 100%;
+  height: 70rpx;
+  margin-top: 10rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.page-cate-name{
+  
+  width: 105rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color: #000;
+  font-size: 33rpx;
+  /* font-weight: bold; */
+}
+
+
+.page-item{
+  width: 740rpx;
+  height: 70rpx;
+  border-radius: 8rpx;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rpx;
+  line-height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+}
+
+.page-item-content{
+  width: 105rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color: #585858;
+  font-size: 20rpx;
+}

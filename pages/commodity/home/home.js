@@ -83,7 +83,7 @@ Page({
       good:'',
     })
     this.getAllCate();
-    this.getAllGood();
+    // this.getAllGood();
 
   },
 

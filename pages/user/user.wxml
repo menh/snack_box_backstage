@@ -3,4 +3,27 @@
     <view class="page-title-cate{{navActive === '0' ? '-choose':''}}" data-index="0" catchtap='chooseCate'>未处理分享</view>
     <view class="page-title-cate{{navActive === '1' ? '-choose':''}}" data-index="1" catchtap='chooseCate'>全部分享</view>
   </view>
+
+  <view class='page-cate'>
+    <view class='page-cate-name'>id</view>
+    <view class='page-cate-name'>我</view>
+    <view class='page-cate-name'>我电话</view>
+    <view class='page-cate-name'>他</view>
+    <view class='page-cate-name'>他电话</view>
+    <view class='page-cate-name'>状态</view>
+    <view class='page-cate-name'>操作</view>
+  </view>
+
+
+  <view class='page-item' wx:for="{{share}}" wx:for-item="share_item" wx:key="{{index}}">
+    <view class='page-item-content'>{{share_item.shareId}}</view>
+    <view class='page-item-content'>{{share_item.shareName}}</view>
+    <view class='page-item-content' style='color:green' data-phone='{{share_item.sharePhone}}' bindtap='callPhone'>{{share_item.sharePhone}}</view>
+    <view class='page-item-content'>{{share_item.beSharedName}}</view>
+    <view class='page-item-content' style='color:green' data-phone='{{share_item.beSharedPhone}}' bindtap='callPhone'>{{share_item.beSharedPhone}}</view>
+    <view class='page-item-content'>{{share_item.status === "0"?'未处理':'已处理'}}</view>
+    <view class='page-item-content' style='color:green' data-index='{{index}}' bindtap='cate_edit'>{{share_item.status === "0"?'处理':'恢复'}}</view>
+
+  </view>
+
 </scroll-view>

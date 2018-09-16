@@ -6,13 +6,46 @@ Page({
    */
   data: {
     navActive: '0',
-    getAllShow:[
+    share: [
       {
-        shareId:'S00000001',
-        shareName:'门虎',
-        sharePhone:'13582342871',
-        beSharedName:'大哥',
-        beSharedPhone:'15013149789'
+        shareId: 'S00000001',
+        shareName: '门虎',
+        sharePhone: '13582342871',
+        beSharedName: '大哥',
+        beSharedPhone: '15013149789',
+        status: '0'
+      },
+      {
+        shareId: 'S00000001',
+        shareName: '门虎',
+        sharePhone: '13582342871',
+        beSharedName: '大哥',
+        beSharedPhone: '15013149789',
+        status: '0'
+      },
+      {
+        shareId: 'S00000001',
+        shareName: '门虎',
+        sharePhone: '13582342871',
+        beSharedName: '大哥',
+        beSharedPhone: '15013149789',
+        status: '0'
+      },
+      {
+        shareId: 'S00000001',
+        shareName: '门虎',
+        sharePhone: '13582342871',
+        beSharedName: '大哥',
+        beSharedPhone: '15013149789',
+        status: '0'
+      },
+      {
+        shareId: 'S00000001',
+        shareName: '门虎',
+        sharePhone: '13582342871',
+        beSharedName: '大哥',
+        beSharedPhone: '15013149789',
+        status: '0'
       }
     ]
   },
@@ -71,5 +104,15 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  callPhone:function(e){
+    var phone = e.currentTarget.dataset.phone;
+    console.log(e.currentTarget.dataset.phone);
+    wx.setClipboardData({
+      data: phone,
+    });
+    wx.makePhoneCall({
+      phoneNumber: phone //仅为示例，并非真实的电话号码
+    })
   }
 })
