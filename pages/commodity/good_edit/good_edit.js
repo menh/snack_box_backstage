@@ -199,6 +199,21 @@ Page({
     if (good.goodId == undefined) {
       good.goodId = '';
     }
+    if (good.goodId == undefined){
+      good.saleVolume = 0;
+    }
+    if (good.salePrice == undefined) {
+      good.salePrice = 0;
+    }
+    if(good.valid == undefined){
+      good.valid = '1';
+    }
+    if(good.reorder == undefined){
+      good.reorder = '1';
+    }
+    if(good.saleVolume == undefined){
+      good.saleVolume = 0;
+    }
     wx.showLoading({
       title: '正在载入'
     })

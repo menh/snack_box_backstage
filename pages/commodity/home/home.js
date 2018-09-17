@@ -249,7 +249,7 @@ Page({
 
   updGood: function (good) {
     // var self = this;
-    wx.request({
+      wx.request({
       url: app.globalData.serverIp + 'updGood.do',
       data: {
         goodId: good.goodId, 
