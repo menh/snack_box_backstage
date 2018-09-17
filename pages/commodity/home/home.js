@@ -167,6 +167,7 @@ Page({
     wx.request({
       url: app.globalData.serverIp + 'getAllCategory.do',
       data: {
+        openid: app.globalData.openid
       },
       method: 'POST',
       header: {
@@ -194,7 +195,8 @@ Page({
     wx.request({
       url: app.globalData.serverIp + 'delCategory.do',
       data: {
-        categoryId: categoryId
+        categoryId: categoryId,
+        openid: app.globalData.openid
       },
       method: 'POST',
       header: {
@@ -227,6 +229,7 @@ Page({
     wx.request({
       url: app.globalData.serverIp + 'getAllGood.do',
       data: {
+        openid: app.globalData.openid
       },
       method: 'POST',
       header: {
@@ -249,7 +252,7 @@ Page({
 
   updGood: function (good) {
     // var self = this;
-      wx.request({
+    wx.request({
       url: app.globalData.serverIp + 'updGood.do',
       data: {
         goodId: good.goodId, 
@@ -263,7 +266,8 @@ Page({
         goodUnit: good.goodUnit,
         categoryId: good.categoryId,
         valid: good.valid,
-        reorder: good.reorder
+        reorder: good.reorder,
+        openid: app.globalData.openid
       },
       method: 'POST',
       header: {
@@ -287,7 +291,8 @@ Page({
     wx.request({
       url: app.globalData.serverIp + 'delGood.do',
       data: {
-        goodId: goodId
+        goodId: goodId,
+        openid: app.globalData.openid
       },
       method: 'POST',
       header: {

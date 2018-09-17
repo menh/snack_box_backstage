@@ -1,10 +1,9 @@
 {
   "pages": [
-    
+    "pages/sales/sales",
     "pages/commodity/home/home",
     "pages/user/user",
     "pages/commodity/good_edit/good_edit",
-    "pages/sales/sales",
     "pages/openid/openid",
     "pages/commodity/cate_edit/cate_edit"
   ],

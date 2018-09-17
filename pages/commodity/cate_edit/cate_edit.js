@@ -149,7 +149,8 @@ Page({
         categoryId: cate.categoryId,
         categoryName: cate.categoryName,
         reorder: cate.reorder,
-        valid: cate.valid
+        valid: cate.valid,
+        openid: app.globalData.openid
       },
       method: 'POST',
       header: {

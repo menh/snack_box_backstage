@@ -231,7 +231,8 @@ Page({
         goodUnit: good.goodUnit,
         categoryId: good.categoryId,
         valid: good.valid,
-        reorder: good.reorder
+        reorder: good.reorder,
+        openid: app.globalData.openid
       },
       method: 'POST',
       header: {

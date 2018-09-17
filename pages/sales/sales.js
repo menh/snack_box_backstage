@@ -114,7 +114,8 @@ Page({
       url: app.globalData.serverIp + 'getSnackOrderSaleNum.do',
       data: {
         beginDate: beginDate,
-        endDate: endDate
+        endDate: endDate,
+        openid: app.globalData.openid
       },
       method: 'POST',
       header: {
@@ -176,7 +177,8 @@ Page({
       url: app.globalData.serverIp + 'getSnackOrderGoodCount.do',
       data: {
         beginDate: beginDate,
-        endDate: endDate
+        endDate: endDate,
+        openid: app.globalData.openid
       },
       method: 'POST',
       header: {
