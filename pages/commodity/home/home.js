@@ -38,7 +38,6 @@ Page({
       good:'',
     })
     this.getAllCate();
-    this.getAllGood();
 
   },
 
@@ -179,7 +178,9 @@ Page({
         self.setData({
           cate: res.data
         })
-        wx.hideLoading();
+
+        self.getAllGood();
+        // wx.hideLoading();
       },
       fail: function (res) {
         console.log("faile");
@@ -237,6 +238,7 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
+        self.setGoodsCate(res.data);
         console.log("goods");
         self.setData({
           good: res.data
@@ -248,6 +250,17 @@ Page({
         console.log("faile");
       }
     })
+  },
+  setGoodsCate(goods){
+    var cates = this.data.cate
+    for(var i = 0;i < goods.length;i++){
+      for(var j = 0; j < cates.length;j++ ){
+        if(goods[i].categoryId == cates[j].categoryId){
+          goods[i].categoryName = cates[j].categoryName;
+          break;
+        }
+      }
+    }
   },
 
   updGood: function (good) {
