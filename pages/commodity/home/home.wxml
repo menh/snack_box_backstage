@@ -41,20 +41,20 @@
       </view>
       <view class='home-good-item-property2'>
         <view class='home-good-item-property2-attribute'>目录:{{snack_item.categoryName}}</view>
-        <view class='home-good-item-property2-attribute'>等级:{{snack_item.priority}}</view>
-        <view class='home-good-item-property2-attribute'>显示:{{snack_item.isDisplay}}</view>
+        <view class='home-good-item-property2-attribute'>优先:{{snack_item.reorder}}</view>
+        <view class='home-good-item-property2-attribute'>显示:{{snack_item.valid === "1"?'显示':'不显示'}}</view>
       </view>
 
 
       <view class='home-good-item-operation'>
-        <view class='home-good-item-operation-button' style='color:green' data-id='{{snack_item.goodId}}' data-name='{{snack_item.goodName}}' bindtap='cate_edit'>编辑</view>
-        <view class='home-good-item-operation-button' style='color:red ' data-id='{{snack_item.goodId}}' data-name='{{snack_item.goodName}}' bindtap='cate_delete'>删除</view>
+        <view class='home-good-item-operation-button' style='color:green' data-index='{{index}}' bindtap='good_edit'>编辑</view>
+        <view class='home-good-item-operation-button' style='color:red ' data-index='{{index}}' bindtap='good_delete'>删除</view>
       </view>
 
     </view>
 
     <view class='home-cate-item'>
-      <image class='home-cate-item-add' src='/image/add.png' bindtap='cate_add'></image>
+      <image class='home-cate-item-add' src='/image/add.png' bindtap='good_add'></image>
     </view>
 
 

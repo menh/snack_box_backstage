@@ -7,37 +7,37 @@
 
   <view class="page-section">
     <view class="page-section-title">商品名</view>
-    <input class="page-section-input" name="input" placeholder="商品名"></input>
+    <input class="page-section-input" name="input" placeholder="商品名" value='{{good.goodName}}' bindinput="bindGoodNameInput"></input>
   </view>
   <view class="page-section">
     <view class="page-section-title">目录</view>
     <view class='page-section-input'>
       <view class="page-section-input-explain">当前选择</view>
-      <picker class="page-section-input-picker" bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="{{'categoryName'}}">
-        <view class="page-section-input-picker-view">{{array[index].categoryName}}</view>
+      <picker class="page-section-input-picker" bindchange="bindPickerChange" value="{{cateIndex}}" range="{{cate}}" range-key="{{'categoryName'}}">
+        <view class="page-section-input-picker-view">{{cate[cateIndex].categoryName}}</view>
       </picker>
     </view>
   </view>
   <view class="page-section">
     <view class="page-section-title">价格</view>
-    <input class="page-section-input" name="input" type="number" placeholder="价格"></input>
+    <input class="page-section-input" name="input" type="digit" placeholder="价格" value='{{good.price}}' bindinput="bindPriceInput"></input>
   </view>
   <view class="page-section">
     <view class="page-section-title">单位</view>
-    <input class="page-section-input" name="input" type="number" placeholder="单位"></input>
+    <input class="page-section-input" name="input" placeholder="单位" value='{{good.goodUnit}}' bindinput="bindGoodUnitInput"></input>
   </view>
   <view class="page-section">
     <view class="page-section-title">优先级</view>
-    <input class="page-section-input" name="input" type="number" placeholder="优先级"></input>
+    <input class="page-section-input" name="input" type="number" placeholder="优先级"  value='{{good.reorder}}' bindinput="bindReorderInput"></input>
   </view>
 
   <view class="page-section">
     <view class="page-section-title">是否显示</view>
-    <radio-group class='page-section-radio' name="radio">
-      <radio value="radio1">显示</radio>
-      <radio value="radio2">隐藏</radio>
+    <radio-group class='page-section-radio' name="radio"  bindchange="bindValidChange">
+      <radio value="1" checked="{{good.valid==='1'?true:false}}">显示</radio>
+      <radio value="0" checked="{{good.valid==='1'?false:true}}">隐藏</radio>
     </radio-group>
   </view>
 
-  <button class="page-submit" type="primary">提交</button>
+  <button class="page-submit" type="primary"  bindtap='submit_good_edit'>提交</button>
 </view>
