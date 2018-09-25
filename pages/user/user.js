@@ -1,4 +1,7 @@
 // pages/user/user.js
+const app = getApp()
+
+
 Page({
 
   /**
@@ -6,48 +9,7 @@ Page({
    */
   data: {
     navActive: '0',
-    share: [
-      {
-        shareId: 'S00000001',
-        shareName: '门虎',
-        sharePhone: '13582342871',
-        beSharedName: '大哥',
-        beSharedPhone: '15013149789',
-        status: '0'
-      },
-      {
-        shareId: 'S00000001',
-        shareName: '门虎',
-        sharePhone: '13582342871',
-        beSharedName: '大哥',
-        beSharedPhone: '15013149789',
-        status: '0'
-      },
-      {
-        shareId: 'S00000001',
-        shareName: '门虎',
-        sharePhone: '13582342871',
-        beSharedName: '大哥',
-        beSharedPhone: '15013149789',
-        status: '0'
-      },
-      {
-        shareId: 'S00000001',
-        shareName: '门虎',
-        sharePhone: '13582342871',
-        beSharedName: '大哥',
-        beSharedPhone: '15013149789',
-        status: '0'
-      },
-      {
-        shareId: 'S00000001',
-        shareName: '门虎',
-        sharePhone: '13582342871',
-        beSharedName: '大哥',
-        beSharedPhone: '15013149789',
-        status: '0'
-      }
-    ]
+    share:[]
   },
 
   /**
@@ -68,7 +30,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getAllShare
+    this.getAllShare();
   },
 
   /**
@@ -103,6 +65,36 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+
+
+  getAllShare: function () {
+var self = this;
+    wx.showLoading({
+      title: '请稍等',
+    })
+    wx.request({
+      url: app.globalData.serverIp + 'GetCustomerFriend.do',
+      data: {
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res.data);
+        self.setData({
+          share:res.data
+        })
+        console.log("true");
+        wx.hideLoading();
+      },
+      fail: function (res) {
+        console.log(res.data);
+        console.log("faile");
+      }
+    })
 
   },
   callPhone:function(e){

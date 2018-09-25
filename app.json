@@ -1,11 +1,12 @@
 {
   "pages": [
     "pages/sales/sales",
-    "pages/commodity/home/home",
     "pages/user/user",
+    "pages/commodity/home/home",
     "pages/commodity/good_edit/good_edit",
     "pages/openid/openid",
-    "pages/commodity/cate_edit/cate_edit"
+    "pages/commodity/cate_edit/cate_edit",
+    "pages/box/box"
   ],
   "window": {
     "backgroundTextStyle": "dark",
