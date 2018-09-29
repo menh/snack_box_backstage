@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/sales/sales",
     "pages/user/user",
     "pages/commodity/home/home",
+    "pages/sales/sales",
     "pages/commodity/good_edit/good_edit",
+    "pages/commodity/structure_edit/structure_edit",
     "pages/openid/openid",
     "pages/commodity/cate_edit/cate_edit",
     "pages/box/box"
@@ -31,10 +32,6 @@
       {
         "pagePath": "pages/user/user",
         "text": "用户管理"
-      },
-      {
-        "pagePath": "pages/openid/openid",
-        "text": "获取id"
       }
     ]
   }

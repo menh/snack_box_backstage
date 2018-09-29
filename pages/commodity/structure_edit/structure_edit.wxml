@@ -1,0 +1,9 @@
+<view class='page'>
+
+  <view class="page-section">
+    <view class="page-section-title">结构名</view>
+    <input class="page-section-input" name="input" placeholder="结构名" value='{{structure.name}}' bindinput="bindGoodNameInput"></input>
+  </view>
+
+  <button class="page-submit" type="primary"  bindtap='submit_struct ure_edit'>提交</button>
+</view>

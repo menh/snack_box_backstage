@@ -1,34 +1,25 @@
 <scroll-view class='page'>
-  <view class='page-title'>
+  <!-- <view class='page-title'>
     <view class="page-title-cate{{navActive === '0' ? '-choose':''}}" data-index="0" catchtap='chooseCate'>未处理分享</view>
     <view class="page-title-cate{{navActive === '1' ? '-choose':''}}" data-index="1" catchtap='chooseCate'>全部分享</view>
-  </view>
+  </view> -->
 
   <view class='page-cate'>
     <view class='page-cate-name'>id</view>
+    <view class='page-cate-name'>申请人</view>
     <view class='page-cate-name'>推荐人</view>
-    <view class='page-cate-name'>被推荐人</view>
-    <view class='page-cate-name'>状态</view>
     <view class='page-cate-name'>操作</view>
   </view>
-
-
   <view class='page-item' wx:for="{{share}}" wx:for-item="share_item" wx:key="{{index}}">
 
     <view class='page-item-content'>{{share_item.custonerFriendid}}</view>
     <view class='page-item-content'>
-      <view class='page-item-content-c'>{{share_item.ownName}}</view>
-      <view class='page-item-content-c' style='color:green' data-phone='{{share_item.ownPhone}}' bindtap='callPhone'>{{share_item.ownPhone}}</view>
-    </view>
-    <view class='page-item-content'>
       <view class='page-item-content-c'>{{share_item.friendName}}</view>
-      <view class='page-item-content-c' style='color:green' data-phone='{{share_item.friendPhone}}' bindtap='callPhone'>{{share_item.friendPhone}}</view>
+      <view cla ss='page-item-content-c' data-phone='{{share_item.friendPhone}}' bindtap='callPhone'>{{share_item.friendPhone}}</view>
       <view class='page-item-content-c'>{{share_item.address}}</view>
     </view>
-
-    <view class='page-item-content'>{{share_item.status === "0"?'未处理':'已处理'}}</view>
-    <view class='page-item-content' style='color:green' data-index='{{index}}' bindtap='cate_edit'>{{share_item.status === "0"?'处理':'恢复'}}</view>
-
+    <view class='page-item-content' data-phone='{{share_item.ownPhone}}' bindtap='callPhone'>{{share_item.ownPhone}}</view>
+    <view class='page-item-content' style='color:red' data-index='{{index}}' bindtap='share_delete'>删除</view>
 
   </view>
 

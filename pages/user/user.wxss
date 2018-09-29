@@ -51,7 +51,7 @@ page {
 
 .page-cate-name{
   
-  width: 150rpx;
+  width: 187rpx;
   height: 70rpx;
   line-height: 70rpx;
   text-align: center;
@@ -63,29 +63,32 @@ page {
 
 .page-item{
   width: 740rpx;
-  height: 150rpx;
+  height: 120rpx;
   border-radius: 8rpx;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5rpx;
-  line-height: 150rpx;
+  line-height: 120rpx;
   display: flex;
   flex-direction: row;
+  text-align: center;
   background-color: white;
 }
 
 .page-item-content{
-  width: 150rpx;
-  height: 150rpx;
-  line-height: 150rpx;
+  width: 187rpx;
+  height: 105rpx;
+  line-height: 105rpx;
+  margin-top: 7.5rpx;
   text-align: center;
   color: #585858;
   font-size: 22rpx;
 }
+
 .page-item-content-c{
   width: 100%;
-  height: 40rpx;
-  line-height: 70rpx;
+  height: 35rpx;
+  line-height: 35rpx;
   text-align: left;
   color: #585858;
   font-size: 22rpx;

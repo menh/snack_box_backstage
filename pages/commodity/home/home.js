@@ -6,11 +6,113 @@ Page({
    * 页面的初始数据
    */
   data: {
-    navActive: '0',
+    navActive: '2',
     //排序按照优先字段来
-    cate:[],
+    cate: [],
 
     good: [],
+
+    structure: [{
+      structureId: 's000000001',
+      name: '新盒子',
+      isNew: true,
+      isCheck: false,
+      goodSum: 42,
+      goodPrice: 80,
+      goods: [{
+        goodId: 'G000000001',
+        goodName: '好丽友',
+        sum: 2
+      }, {
+        goodId: 'G000000002',
+        goodName: '千叶面包',
+        sum: 0
+      }, {
+        goodId: 'G000000003',
+        goodName: '八宝粥',
+        sum: 1
+      }]
+    }, {
+      structureId: 's000000002',
+      name: '盒子A',
+      isNew: false,
+      isCheck: true,
+      goodSum: 42,
+      goodPrice: 80,
+      goods: [{
+        goodId: 'G000000001',
+        goodName: '好丽友',
+        sum: 2
+      }, {
+        goodId: 'G000000002',
+        goodName: '千叶面包',
+        sum: 0
+      }, {
+        goodId: 'G000000003',
+        goodName: '八宝粥',
+        sum: 1
+      }]
+    }, {
+      structureId: 's000000003',
+      name: '盒子B',
+      isNew: false,
+      isCheck: false,
+      goodSum: 42,
+      goodPrice: 80,
+      goods: [{
+        goodId: 'G000000001',
+        goodName: '好丽友',
+        sum: 2
+      }, {
+        goodId: 'G000000002',
+        goodName: '千叶面包',
+        sum: 0
+      }, {
+        goodId: 'G000000003',
+        goodName: '八宝粥',
+        sum: 1
+      }]
+    }, {
+      structureId: 's000000004',
+      name: '盒子C',
+      isNew: false,
+      isCheck: false,
+      goodSum: 42,
+      goodPrice: 80,
+      goods: [{
+        goodId: 'G000000001',
+        goodName: '好丽友',
+        sum: 2
+      }, {
+        goodId: 'G000000002',
+        goodName: '千叶面包',
+        sum: 0
+      }, {
+        goodId: 'G000000003',
+        goodName: '八宝粥',
+        sum: 1
+      }]
+    }, {
+      structureId: 's000000005',
+      name: '盒子D',
+      isNew: false,
+      isCheck: false,
+      goodSum: 42,
+      goodPrice: 80,
+      goods: [{
+        goodId: 'G000000001',
+        goodName: '好丽友',
+        sum: 2
+      }, {
+        goodId: 'G000000002',
+        goodName: '千叶面包',
+        sum: 0
+      }, {
+        goodId: 'G000000003',
+        goodName: '八宝粥',
+        sum: 1
+      }]
+    }],
   },
 
   /**
@@ -25,17 +127,17 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     //这里应该调用接口更新cate（目录）
     this.setData({
-      cate:'',
-      good:'',
+      cate: '',
+      good: '',
     })
     this.getAllCate();
 
@@ -87,13 +189,13 @@ Page({
     // this.getSnackOrderGoodCount(index);
   },
 
-  cate_add: function (e) {
+  cate_add: function(e) {
     wx.navigateTo({
       url: "/pages/commodity/cate_edit/cate_edit?isEdit=false",
     })
   },
 
-  cate_edit: function (e) {
+  cate_edit: function(e) {
     let categoryIndex = e.currentTarget.dataset.index;
     console.log(categoryIndex);
     wx.navigateTo({
@@ -101,14 +203,14 @@ Page({
     })
   },
 
-  good_add: function (e) {
+  good_add: function(e) {
     wx.setStorageSync('cates', this.data.cate);
     wx.navigateTo({
       url: "/pages/commodity/good_edit/good_edit?isEdit=false",
     })
   },
 
-  good_edit: function (e) {
+  good_edit: function(e) {
     let goodIndex = e.currentTarget.dataset.index;
     console.log(goodIndex);
     wx.setStorageSync('good_edit_item', this.data.good[goodIndex]);
@@ -138,14 +240,47 @@ Page({
     })
   },
 
-  good_delete : function (e) {
+  structure_add: function(e) {
+    wx.navigateTo({
+      url: "/pages/commodity/structure_edit/structure_edit?isEdit=false",
+    })
+  },
+
+  structure_edit: function(e) {
+    let structureIndex = e.currentTarget.dataset.index;
+    console.log(structureIndex);
+    wx.navigateTo({
+      url: "/pages/commodity/structure_edit/structure_edit?isEdit=true&structureItem=" + JSON.stringify(this.data.structure[structureIndex]),
+    })
+  },
+
+  structure_delete: function(e) {
+    const self = this;
+    let index = e.currentTarget.dataset.index;
+    var structureItem = this.data.structure[index];
+    wx.showModal({
+      title: '您确定要删除"' + structureItem.name + '"吗',
+      content: '该操作无法撤回，请谨慎操作',
+      success: function(res) {
+        if (res.confirm) {
+          console.log('用户点击确定');
+
+          //调用删除接口
+          //刷新cate
+        } else if (res.cancel) {
+          console.log('用户点击取消');
+        }
+      }
+    })
+  },
+  good_delete: function(e) {
     const self = this;
     let index = e.currentTarget.dataset.index;
     var goodItem = this.data.good[index];
     wx.showModal({
       title: '您确定要删除"' + goodItem.goodName + '"吗',
       content: '该操作无法撤回，请谨慎操作',
-      success: function (res) {
+      success: function(res) {
         if (res.confirm) {
           console.log('用户点击确定');
           self.deleteGood(goodItem.goodId);
@@ -158,7 +293,7 @@ Page({
     })
   },
 
-  getAllCate: function () {
+  getAllCate: function() {
     var self = this;
     wx.showLoading({
       title: '正在载入'
@@ -172,7 +307,7 @@ Page({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         console.log("category");
         self.setData({
@@ -182,13 +317,13 @@ Page({
         self.getAllGood();
         // wx.hideLoading();
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log("faile");
       }
     })
   },
 
-  deleteCategory: function (categoryId) {
+  deleteCategory: function(categoryId) {
     var self = this;
     wx.showLoading({
       title: '正在载入'
@@ -203,26 +338,26 @@ Page({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         wx.hideLoading();
-        if(res.data){
+        if (res.data) {
           self.getAllCate()
-        }else{
+        } else {
           wx.showModal({
             title: '',
-            showCancel:false,
+            showCancel: false,
             content: '请先删除该目录全部商品',
           })
         }
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log("faile");
       }
     })
   },
 
-  getAllGood: function () {
+  getAllGood: function() {
     var self = this;
     wx.showLoading({
       title: '正在载入'
@@ -236,7 +371,7 @@ Page({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         self.setGoodsCate(res.data);
         console.log("goods");
@@ -246,16 +381,16 @@ Page({
         wx.hideLoading();
 
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log("faile");
       }
     })
   },
-  setGoodsCate(goods){
+  setGoodsCate(goods) {
     var cates = this.data.cate
-    for(var i = 0;i < goods.length;i++){
-      for(var j = 0; j < cates.length;j++ ){
-        if(goods[i].categoryId == cates[j].categoryId){
+    for (var i = 0; i < goods.length; i++) {
+      for (var j = 0; j < cates.length; j++) {
+        if (goods[i].categoryId == cates[j].categoryId) {
           goods[i].categoryName = cates[j].categoryName;
           break;
         }
@@ -263,12 +398,12 @@ Page({
     }
   },
 
-  updGood: function (good) {
+  updGood: function(good) {
     // var self = this;
     wx.request({
       url: app.globalData.serverIp + 'updGood.do',
       data: {
-        goodId: good.goodId, 
+        goodId: good.goodId,
         price: good.price,
         salePrice: good.salePrice,
         goodName: good.goodName,
@@ -286,16 +421,16 @@ Page({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log("faile");
       }
     })
   },
 
-  deleteGood: function (goodId) {
+  deleteGood: function(goodId) {
 
     var self = this;
     wx.showLoading({
@@ -311,7 +446,7 @@ Page({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         wx.hideLoading();
         if (res.data) {
@@ -324,7 +459,7 @@ Page({
           })
         }
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log("faile");
       }
     })

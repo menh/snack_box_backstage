@@ -95,22 +95,22 @@ Page({
 
 
     if (index == '0') {
-      var beginDate = [year, month, day].map(this.formatNumber).join('/');
-      var endDate = [year, month, day + 1].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day].map(this.formatNumber).join('');
+      var endDate = [year, month, day + 1].map(this.formatNumber).join('');
 
     } else if (index == '1') {
-      var beginDate = [year, month, day - 3].map(this.formatNumber).join('/');
-      var endDate = [year, month, day].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day - 3].map(this.formatNumber).join('');
+      var endDate = [year, month, day].map(this.formatNumber).join('');
 
     } else if (index == '2') {
-      var beginDate = [year, month, day - 7].map(this.formatNumber).join('/');
-      var endDate = [year, month, day].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day - 7].map(this.formatNumber).join('');
+      var endDate = [year, month, day].map(this.formatNumber).join('');
     } else if (index == '3') {
-      var beginDate = [year, month, day - 30].map(this.formatNumber).join('/');
-      var endDate = [year, month, day+1].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day - 30].map(this.formatNumber).join('');
+      var endDate = [year, month, day+1].map(this.formatNumber).join('');
     }else{
-      var beginDate = [year, month, day - 1].map(this.formatNumber).join('/');
-      var endDate = [year, month, day].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day - 1].map(this.formatNumber).join('');
+      var endDate = [year, month, day].map(this.formatNumber).join('');
     }
 
     wx.request({
@@ -162,22 +162,23 @@ Page({
 
 
     if (index == '0') {
-      var beginDate = [year, month, day].map(this.formatNumber).join('/');
-      var endDate = [year, month, day + 1].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day].map(this.formatNumber).join('');
+      var endDate = [year, month, day + 1].map(this.formatNumber).join('');
+    
 
     } else if (index == '1') {
-      var beginDate = [year, month, day - 3].map(this.formatNumber).join('/');
-      var endDate = [year, month, day].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day - 3].map(this.formatNumber).join('');
+      var endDate = [year, month, day].map(this.formatNumber).join('');
 
     } else if (index == '2') {
-      var beginDate = [year, month, day - 7].map(this.formatNumber).join('/');
-      var endDate = [year, month, day].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day - 7].map(this.formatNumber).join('');
+      var endDate = [year, month, day].map(this.formatNumber).join('');
     } else if (index == '3') {
-      var beginDate = [year, month, day - 30].map(this.formatNumber).join('/');
-      var endDate = [year, month, day + 1].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day - 30].map(this.formatNumber).join('');
+      var endDate = [year, month, day + 1].map(this.formatNumber).join('');
     } else {
-      var beginDate = [year, month, day - 1].map(this.formatNumber).join('/');
-      var endDate = [year, month, day].map(this.formatNumber).join('/');
+      var beginDate = [year, month, day - 1].map(this.formatNumber).join('');
+      var endDate = [year, month, day].map(this.formatNumber).join('');
     }
     
     wx.request({

@@ -2,6 +2,7 @@
   <view class='home-title'>
     <view class="home-title-cate{{navActive === '0' ? '-choose':''}}" data-index="0" catchtap='chooseCate'>类别管理</view>
     <view class="home-title-cate{{navActive === '1' ? '-choose':''}}" data-index="1" catchtap='chooseCate'>商品管理</view>
+    <view class="home-title-cate{{navActive === '2' ? '-choose':''}}" data-index="2" catchtap='chooseCate'>结构管理</view>
   </view>
 
   <view class='home-cate' wx:if="{{navActive=='0'}}">
@@ -58,9 +59,35 @@
     </view>
 
 
+  </view>
 
 
 
+  <view class='home-structure' wx:elif="{{navActive=='2'}}">
+    <view class='home-cate-head'>
+      <view class='home-cate-head-name'>结构</view>
+      <view class='home-cate-head-name'>数量</view>
+      <view class='home-cate-head-name'>总价</view>
+      <view class='home-cate-head-name'>新增</view>
+      <view class='home-cate-head-name'>补货</view>
+      <view class='home-cate-head-name'>操作</view>
+    </view>
+
+    <view class='home-cate-item' wx:for="{{structure}}" wx:for-item="structure_item" wx:key="{{index}}">
+      <view class='home-cate-item-content'>{{structure_item.name}}</view>
+      <view class='home-cate-item-content'>{{structure_item.goodSum}}</view>
+      <view class='home-cate-item-content'>{{structure_item.goodPrice}}</view>
+      <view class='home-cate-item-content'>{{structure_item.isNew?'新用户':''}}</view>
+      <view class='home-cate-item-content'>{{structure_item.isCheck?'补货':''}}</view>
+
+      <view class='home-cate-item-content'>
+        <view class='home-cate-item-content-button' style='color:green' data-index='{{index}}' bindtap='structure_edit'>编辑</view>
+        <view class='home-cate-item-content-button' style='color:red ' data-index='{{index}}' bindtap='structure_delete'>删除</view>
+      </view>
+    </view>
+    <view class='home-cate-item'>
+      <image class='home-cate-item-add' src='/image/add.png' bindtap='structure_add'></image>
+    </view>
 
 
   </view>
