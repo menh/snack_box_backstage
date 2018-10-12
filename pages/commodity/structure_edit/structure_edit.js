@@ -1,6 +1,6 @@
 // pages/good/good_add/good_add.js
 const app = getApp()
-
+var isEdit='true'
 const upng = require('../../../utils/UPNG.js')
 
 Page({
@@ -9,9 +9,41 @@ Page({
    * 页面的初始数据
    */
   data: {
-    structure: [
-      
-    ]
+    structureItem: {
+      structureId: '',//编号
+      name: '盒子A',//结构名字
+      remarks: '用于新用户',//备注
+      goodsTypeQuantity: 0,//商品种类
+      goodSum: 0,//商品数量
+      cost: 0,//商品成本
+      price: 0,//商品售价
+      createTime: 0,
+      lastEditTime: 0,
+      useNum: 0,//共有多少盒子使用该结构
+      display: '1',//是否显示
+      goods: [{//商品
+        goodId: 'G000000001',
+        goodName: '好丽友',
+        cost: 2.8,
+        price: 3.5,
+        sum: 2
+      }, {
+        goodId: 'G000000002',
+        goodName: '千叶面包',
+        cost: 1.3,
+        price: 2,
+        sum: 3
+      }, {
+        goodId: 'G000000003',
+        goodName: '八宝粥',
+        cost: 3.8,
+        price: 4.5,
+        sum: 2
+      }]
+    },
+    isEdit:'false',
+    goodsArray: [[], []],
+    goodsSource:[]
   },
 
   /**
@@ -20,23 +52,23 @@ Page({
   onLoad: function (options) {
     var self = this;
 
-    var isEdit = options.isEdit;
+    isEdit = options.isEdit;
     console.log(isEdit);
     //编辑
     if (isEdit == 'true') {
       wx.setNavigationBarTitle({
-        title: '编辑结构'
+        title: '查看结构'
       });
       console.log(JSON.parse(options.structureItem))
       self.setData({
-        structure: JSON.parse(options.structureItem)
+        structureItem: JSON.parse(options.structureItem)
       })
     } //添加
     else {
       wx.setNavigationBarTitle({
         title: '添加结构'
       });
-
+      this.getAllGood();
     }
   },
 
@@ -88,6 +120,85 @@ Page({
   onShareAppMessage: function() {
 
   },
+  good_delete: function (e) {
+    let goodIndex = e.currentTarget.dataset.index;
+    this.data.structureItem.goods.splice(goodIndex,1);
+    this.setData({
+      structureItem:this.data.structureItem
+    })
+    console.log(this.data.structureItem);
+  },
+
+
+  bindMultiPickerGoodChange:function(e){
+    var goodTemp={};
+
+    goodTemp.goodId = this.data.goodsSource[e.detail.value[0]].goodId;
+    goodTemp.goodName = this.data.goodsSource[e.detail.value[0]].goodName;
+    goodTemp.sum = this.data.goodsArray[1][e.detail.value[1]];
+    this.data.structureItem.goods.push(goodTemp);
+    this.setData({
+      structureItem: this.data.structureItem
+    })
+  },
+
+
+  getAllGood: function () {
+    var self = this;
+    wx.showLoading({
+      title: '正在载入'
+    });
+    wx.request({
+      url: app.globalData.serverIp + 'getAllGood.do',
+      data: {
+        openid: app.globalData.openid
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res.data);
+        self.setGoodsArray(res.data);
+        console.log('goods')
+        wx.hideLoading();
+      },
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
+  },
+
+  setGoodsArray: function (goods) {
+    this.data.goodsSource = goods;
+    var goodsArray = [[],[]];
+    for(var i = 0; i < goods.length;i++){
+      goodsArray[0].push(goods[i].goodName); 
+    }
+    goodsArray[1] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
+    this.setData({
+      goodsArray: goodsArray
+    })
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   bindGoodNameInput: function(e) {
@@ -283,28 +394,5 @@ Page({
       }
     }
     return 0;
-  },
-  clone(obj) {
-    var o;
-    if (typeof obj == "object") {
-      if (obj === null) {
-        o = null;
-      } else {
-        if (obj instanceof Array) {
-          o = [];
-          for (var i = 0, len = obj.length; i < len; i++) {
-            o.push(clone(obj[i]));
-          }
-        } else {
-          o = {};
-          for (var j in obj) {
-            o[j] = clone(obj[j]);
-          }
-        }
-      }
-    } else {
-      o = obj;
-    }
-    return o;
   }
 })

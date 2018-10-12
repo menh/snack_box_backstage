@@ -6,111 +6,42 @@ Page({
    * 页面的初始数据
    */
   data: {
-    navActive: '2',
+    navActive: '3',
     //排序按照优先字段来
     cate: [],
 
     good: [],
 
     structure: [{
-      structureId: 's000000001',
-      name: '新盒子',
-      isNew: true,
-      isCheck: false,
-      goodSum: 42,
-      goodPrice: 80,
-      goods: [{
+      structureId: 's000000001',//编号
+      name: '盒子A',//结构名字
+      remarks: '用于新用户',//备注
+      goodsTypeQuantity:3,//商品种类
+      goodSum: 7,//商品数量
+      cost: 17.3,//商品成本
+      price: 22,//商品售价
+      createTime:20181012123050,
+      lastEditTime:20181013125050,
+      useNum: 20,//共有多少盒子使用该结构
+      display: '1',//是否显示
+      goods: [{//商品
         goodId: 'G000000001',
         goodName: '好丽友',
+        cost: 2.8,
+        price: 3.5,
         sum: 2
       }, {
         goodId: 'G000000002',
         goodName: '千叶面包',
-        sum: 0
+        cost: 1.3,
+        price: 2,
+        sum: 3
       }, {
         goodId: 'G000000003',
         goodName: '八宝粥',
-        sum: 1
-      }]
-    }, {
-      structureId: 's000000002',
-      name: '盒子A',
-      isNew: false,
-      isCheck: true,
-      goodSum: 42,
-      goodPrice: 80,
-      goods: [{
-        goodId: 'G000000001',
-        goodName: '好丽友',
+        cost: 3.8,
+        price: 4.5,
         sum: 2
-      }, {
-        goodId: 'G000000002',
-        goodName: '千叶面包',
-        sum: 0
-      }, {
-        goodId: 'G000000003',
-        goodName: '八宝粥',
-        sum: 1
-      }]
-    }, {
-      structureId: 's000000003',
-      name: '盒子B',
-      isNew: false,
-      isCheck: false,
-      goodSum: 42,
-      goodPrice: 80,
-      goods: [{
-        goodId: 'G000000001',
-        goodName: '好丽友',
-        sum: 2
-      }, {
-        goodId: 'G000000002',
-        goodName: '千叶面包',
-        sum: 0
-      }, {
-        goodId: 'G000000003',
-        goodName: '八宝粥',
-        sum: 1
-      }]
-    }, {
-      structureId: 's000000004',
-      name: '盒子C',
-      isNew: false,
-      isCheck: false,
-      goodSum: 42,
-      goodPrice: 80,
-      goods: [{
-        goodId: 'G000000001',
-        goodName: '好丽友',
-        sum: 2
-      }, {
-        goodId: 'G000000002',
-        goodName: '千叶面包',
-        sum: 0
-      }, {
-        goodId: 'G000000003',
-        goodName: '八宝粥',
-        sum: 1
-      }]
-    }, {
-      structureId: 's000000005',
-      name: '盒子D',
-      isNew: false,
-      isCheck: false,
-      goodSum: 42,
-      goodPrice: 80,
-      goods: [{
-        goodId: 'G000000001',
-        goodName: '好丽友',
-        sum: 2
-      }, {
-        goodId: 'G000000002',
-        goodName: '千叶面包',
-        sum: 0
-      }, {
-        goodId: 'G000000003',
-        goodName: '八宝粥',
-        sum: 1
       }]
     }],
   },
@@ -140,7 +71,6 @@ Page({
       good: '',
     })
     this.getAllCate();
-
   },
 
   /**

@@ -6,6 +6,7 @@
       <view class="sales-title-category-title{{navActive === '1' ? '-choose':''}}" data-index="1" catchtap='chooseTime'>三日</view>
       <view class="sales-title-category-title{{navActive === '2' ? '-choose':''}}" data-index="2" catchtap='chooseTime'>一周</view>
       <view class="sales-title-category-title{{navActive === '3' ? '-choose':''}}" data-index="3" catchtap='chooseTime'>一月</view>
+      <view class="sales-title-category-title{{navActive === '5' ? '-choose':''}}" data-index="5" catchtap='chooseTime'>总共</view>
     </view>
 
     <view class='sales-title-data'>

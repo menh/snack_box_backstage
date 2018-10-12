@@ -67,21 +67,23 @@
     <view class='home-cate-head'>
       <view class='home-cate-head-name'>结构</view>
       <view class='home-cate-head-name'>数量</view>
-      <view class='home-cate-head-name'>总价</view>
-      <view class='home-cate-head-name'>新增</view>
-      <view class='home-cate-head-name'>补货</view>
+      <view class='home-cate-head-name'>成本</view>
+      <view class='home-cate-head-name'>售价</view>
+      <view class='home-cate-head-name'>使用</view>
+      <view class='home-cate-head-name'>显示</view>
       <view class='home-cate-head-name'>操作</view>
     </view>
 
     <view class='home-cate-item' wx:for="{{structure}}" wx:for-item="structure_item" wx:key="{{index}}">
       <view class='home-cate-item-content'>{{structure_item.name}}</view>
       <view class='home-cate-item-content'>{{structure_item.goodSum}}</view>
-      <view class='home-cate-item-content'>{{structure_item.goodPrice}}</view>
-      <view class='home-cate-item-content'>{{structure_item.isNew?'新用户':''}}</view>
-      <view class='home-cate-item-content'>{{structure_item.isCheck?'补货':''}}</view>
+      <view class='home-cate-item-content'>{{structure_item.cost}}</view>
+      <view class='home-cate-item-content'>{{structure_item.price}}</view>
+      <view class='home-cate-item-content'>{{structure_item.useNum}}</view>
+      <view class='home-cate-item-content'>{{structure_item.display==1?'显示':'隐藏'}}</view>
 
       <view class='home-cate-item-content'>
-        <view class='home-cate-item-content-button' style='color:green' data-index='{{index}}' bindtap='structure_edit'>编辑</view>
+        <view class='home-cate-item-content-button' style='color:green' data-index='{{index}}' bindtap='structure_edit'>查看</view>
         <view class='home-cate-item-content-button' style='color:red ' data-index='{{index}}' bindtap='structure_delete'>删除</view>
       </view>
     </view>

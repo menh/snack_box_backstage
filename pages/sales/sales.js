@@ -8,25 +8,32 @@ Page({
 
   data: {
     navActive: '0',
-    data:{},
-    countData:{},
+    data: {},
+    countData: {},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-   //this.getSnackOrderSaleNum('2018/09/03','2018/09/06');
-   //this.getSnackOrderGoodCount('2018/09/03', '2018/09/05');
+    //this.getSnackOrderSaleNum('2018/09/03','2018/09/06');
+    //this.getSnackOrderGoodCount('2018/09/03', '2018/09/05');
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    this.getSnackOrderSaleNum(0);
-    this.getSnackOrderGoodCount(0);
-    
+
+    var beginDate = this.getBeginDate(0);
+    var endDate = this.getEndDate(0);
+
+
+    this.getSnackOrderSaleNum(beginDate, endDate);
+    this.getSnackOrderGoodCount(beginDate, endDate);
+
+    // this.test();
+
   },
 
   /**
@@ -47,10 +54,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    this.getSnackOrderSaleNum(this.data.navActive);
-    this.getSnackOrderGoodCount(this.data.navActive);
-  },
+  onPullDownRefresh: function() {},
 
   /**
    * 页面上拉触底事件的处理函数
@@ -71,12 +75,94 @@ Page({
     });
 
 
-    this.getSnackOrderSaleNum(index);
-    this.getSnackOrderGoodCount(index);
+    var beginDate = this.getBeginDate(index);
+    var endDate = this.getEndDate(index);
+
+
+    this.getSnackOrderSaleNum(beginDate, endDate);
+    this.getSnackOrderGoodCount(beginDate, endDate);
+  },
+
+  test: function() {
+    wx.request({
+      url: app.globalData.serverIp + 'SendMessage.do',
+      data: {
+        phoneNumber: "15013149789",
+        templateId: '209126'
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log("发短信")
+        console.log(res.data)
+      },
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
+  },
+  getBeginDate: function(index) {
+
+
+    //获取截止时间
+    var temp = new Date();
+    var date = new Date(temp);
+
+    if (index == '0') { //今日
+      date.setDate(temp.getDate());
+    } else if (index == '1') { //三日
+      date.setDate(temp.getDate() - 3);
+    } else if (index == '2') { //七日
+      date.setDate(temp.getDate() - 7);
+    } else if (index == '3') { //一月
+      date.setDate(temp.getDate() - 30);
+    } else if (index == '4') { //昨日
+      date.setDate(temp.getDate() - 1);
+    } else { //一年
+      date.setDate(temp.getDate() - 365);
+    }
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var beginDate = [year, month, day].map(this.formatNumber).join('');
+    console.log('beginDate:' + beginDate);
+    return beginDate;
   },
 
 
-  getSnackOrderSaleNum: function(index) {
+  getEndDate: function(index) {
+
+
+    //获取截止时间
+    var temp = new Date();
+    var date = new Date(temp);
+
+    if (index == '0') { //今日
+      date.setDate(temp.getDate() + 1);
+    } else if (index == '1') { //三日
+      date.setDate(temp.getDate());
+    } else if (index == '2') { //七日
+      date.setDate(temp.getDate());
+    } else if (index == '3') { //一月
+      date.setDate(temp.getDate());
+    } else if (index == '4') { //昨日
+      date.setDate(temp.getDate());
+    } else { //总共
+      date.setDate(temp.getDate() + 1);
+    }
+
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var endDate = [year, month, day].map(this.formatNumber).join('');
+    console.log('endDate:' + endDate);
+    return endDate;
+  },
+
+
+  getSnackOrderSaleNum: function(beginDate, endDate) {
     const self = this;
 
     this.setData({
@@ -89,30 +175,7 @@ Page({
       duration: 50000
     })
 
-    var year = new Date().getFullYear()
-    var month = new Date().getMonth() + 1
-    var day = new Date().getDate()
-
-
-    if (index == '0') {
-      var beginDate = [year, month, day].map(this.formatNumber).join('');
-      var endDate = [year, month, day + 1].map(this.formatNumber).join('');
-
-    } else if (index == '1') {
-      var beginDate = [year, month, day - 3].map(this.formatNumber).join('');
-      var endDate = [year, month, day].map(this.formatNumber).join('');
-
-    } else if (index == '2') {
-      var beginDate = [year, month, day - 7].map(this.formatNumber).join('');
-      var endDate = [year, month, day].map(this.formatNumber).join('');
-    } else if (index == '3') {
-      var beginDate = [year, month, day - 30].map(this.formatNumber).join('');
-      var endDate = [year, month, day+1].map(this.formatNumber).join('');
-    }else{
-      var beginDate = [year, month, day - 1].map(this.formatNumber).join('');
-      var endDate = [year, month, day].map(this.formatNumber).join('');
-    }
-
+    // console.log(beginDate + ';' + endDate);
     wx.request({
       url: app.globalData.serverIp + 'getSnackOrderSaleNum.do',
       data: {
@@ -138,12 +201,12 @@ Page({
   },
 
 
-  formatNumber: function (n) {
+  formatNumber: function(n) {
     n = n.toString()
     return n[1] ? n : '0' + n
   },
 
-  getSnackOrderGoodCount: function (index) {
+  getSnackOrderGoodCount: function(beginDate, endDate) {
     const self = this;
 
     this.setData({
@@ -156,31 +219,6 @@ Page({
       duration: 5000
     })
 
-    var year = new Date().getFullYear()
-    var month = new Date().getMonth() + 1
-    var day = new Date().getDate()
-
-
-    if (index == '0') {
-      var beginDate = [year, month, day].map(this.formatNumber).join('');
-      var endDate = [year, month, day + 1].map(this.formatNumber).join('');
-    
-
-    } else if (index == '1') {
-      var beginDate = [year, month, day - 3].map(this.formatNumber).join('');
-      var endDate = [year, month, day].map(this.formatNumber).join('');
-
-    } else if (index == '2') {
-      var beginDate = [year, month, day - 7].map(this.formatNumber).join('');
-      var endDate = [year, month, day].map(this.formatNumber).join('');
-    } else if (index == '3') {
-      var beginDate = [year, month, day - 30].map(this.formatNumber).join('');
-      var endDate = [year, month, day + 1].map(this.formatNumber).join('');
-    } else {
-      var beginDate = [year, month, day - 1].map(this.formatNumber).join('');
-      var endDate = [year, month, day].map(this.formatNumber).join('');
-    }
-    
     wx.request({
       url: app.globalData.serverIp + 'getSnackOrderGoodCount.do',
       data: {
@@ -194,7 +232,7 @@ Page({
       },
       success: function(res) {
         self.setData({
-          countData : res.data
+          countData: res.data
         })
         console.log(res.data);
         console.log('count:' + res.data);

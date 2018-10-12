@@ -15,7 +15,7 @@
     <view class='page-item-content'>{{share_item.custonerFriendid}}</view>
     <view class='page-item-content'>
       <view class='page-item-content-c'>{{share_item.friendName}}</view>
-      <view cla ss='page-item-content-c' data-phone='{{share_item.friendPhone}}' bindtap='callPhone'>{{share_item.friendPhone}}</view>
+      <view class='page-item-content-c' data-phone='{{share_item.friendPhone}}' bindtap='callPhone'>{{share_item.friendPhone}}</view>
       <view class='page-item-content-c'>{{share_item.address}}</view>
     </view>
     <view class='page-item-content' data-phone='{{share_item.ownPhone}}' bindtap='callPhone'>{{share_item.ownPhone}}</view>
