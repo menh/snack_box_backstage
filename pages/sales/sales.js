@@ -164,7 +164,8 @@ Page({
 
   getSnackOrderSaleNum: function(beginDate, endDate) {
     const self = this;
-
+    console.log(app.globalData.serverIp + 'getSnackOrderSaleNum.do');
+    console.log(beginDate);
     this.setData({
       data: {},
     });

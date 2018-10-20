@@ -20,8 +20,6 @@ Page({
       goodSum: 7,//商品数量
       cost: 17.3,//商品成本
       price: 22,//商品售价
-      createTime:20181012123050,
-      lastEditTime:20181013125050,
       useNum: 20,//共有多少盒子使用该结构
       display: '1',//是否显示
       goods: [{//商品
