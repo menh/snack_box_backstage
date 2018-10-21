@@ -74,13 +74,13 @@
       <view class='home-cate-head-name'>操作</view>
     </view>
 
-    <view class='home-cate-item' wx:for="{{structure}}" wx:for-item="structure_item" wx:key="{{index}}">
-      <view class='home-cate-item-content'>{{structure_item.name}}</view>
-      <view class='home-cate-item-content'>{{structure_item.goodSum}}</view>
-      <view class='home-cate-item-content'>{{structure_item.cost}}</view>
-      <view class='home-cate-item-content'>{{structure_item.price}}</view>
-      <view class='home-cate-item-content'>{{structure_item.useNum}}</view>
-      <view class='home-cate-item-content'>{{structure_item.display==1?'显示':'隐藏'}}</view>
+    <view class='home-cate-item' wx:for="{{structs}}" wx:for-item="structure_item" wx:key="{{index}}">
+      <view class='home-cate-item-content'>{{structure_item.struct.structName}}</view>
+      <view class='home-cate-item-content'>{{structure_item.struct.commodityNum}}</view>
+      <view class='home-cate-item-content'>{{structure_item.struct.commodityCost}}</view>
+      <view class='home-cate-item-content'>{{structure_item.struct.commodityPrice}}</view>
+      <view class='home-cate-item-content'>{{structure_item.struct.commodityUse}}</view>
+      <view class='home-cate-item-content'>{{structure_item.struct.display==1?'显示':'隐藏'}}</view>
 
       <view class='home-cate-item-content'>
         <view class='home-cate-item-content-button' style='color:green' data-index='{{index}}' bindtap='structure_edit'>查看</view>

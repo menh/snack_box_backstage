@@ -12,6 +12,8 @@ Page({
 
     good: [],
 
+    structs: [],
+
     structure: [{
       structureId: 's000000001', //编号
       name: '盒子A', //结构名字
@@ -170,8 +172,8 @@ Page({
     })
   },
 
-  getAllStructure:function(e){
-
+  getAllStructure: function(e) {
+    var self = this;
     wx.request({
       url: app.globalData.serverIp + 'GetCommodityStruct.do',
       data: {
@@ -181,15 +183,15 @@ Page({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
+      success: function(res) {
         console.log("structure");
         console.log(res.data);
-        // self.setData({
-        //   cate: res.data
-        // })
+        self.setData({
+          structs: res.data
+        })
         // wx.hideLoading();
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log("faile");
       }
     })
@@ -212,16 +214,14 @@ Page({
   structure_delete: function(e) {
     const self = this;
     let index = e.currentTarget.dataset.index;
-    var structureItem = this.data.structure[index];
+    var structureItem = this.data.structs[index];
     wx.showModal({
-      title: '您确定要删除"' + structureItem.name + '"吗',
+      title: '您确定要删除"' + structureItem.struct.structName + '"吗',
       content: '该操作无法撤回，请谨慎操作',
       success: function(res) {
         if (res.confirm) {
           console.log('用户点击确定');
-
-          //调用删除接口
-          //刷新cate
+          self.deleteStruct(structureItem.struct.structId);
         } else if (res.cancel) {
           console.log('用户点击取消');
         }
@@ -385,7 +385,7 @@ Page({
     })
   },
 
-  deleteGood: function(goodId) {
+  deleteGood: function (goodId) {
 
     var self = this;
     wx.showLoading({
@@ -401,7 +401,7 @@ Page({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function(res) {
+      success: function (res) {
         console.log(res.data);
         wx.hideLoading();
         if (res.data) {
@@ -414,7 +414,43 @@ Page({
           })
         }
       },
-      fail: function(res) {
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
+  },
+
+  deleteStruct: function (structId) {
+
+    var self = this;
+    console.log(structId);
+    wx.showLoading({
+      title: '正在载入'
+    })
+    wx.request({
+      url: app.globalData.serverIp + 'DelCommodityStruct.do',
+      data: {
+        structId: structId,
+        openid: app.globalData.openid
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res.data);
+        wx.hideLoading();
+        if (res.data) {
+          self.getAllStructure()
+        } else {
+          wx.showModal({
+            title: '',
+            showCancel: false,
+            content: '出现问题',
+          })
+        }
+      },
+      fail: function (res) {
         console.log("faile");
       }
     })
