@@ -6,23 +6,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    navActive: '3',
+    navActive: '2',
     //排序按照优先字段来
     cate: [],
 
     good: [],
 
     structure: [{
-      structureId: 's000000001',//编号
-      name: '盒子A',//结构名字
-      remarks: '用于新用户',//备注
-      goodsTypeQuantity:3,//商品种类
-      goodSum: 7,//商品数量
-      cost: 17.3,//商品成本
-      price: 22,//商品售价
-      useNum: 20,//共有多少盒子使用该结构
-      display: '1',//是否显示
-      goods: [{//商品
+      structureId: 's000000001', //编号
+      name: '盒子A', //结构名字
+      remarks: '用于新用户', //备注
+      goodsTypeQuantity: 3, //商品种类
+      goodSum: 7, //商品数量
+      cost: 17.3, //商品成本
+      price: 22, //商品售价
+      useNum: 20, //共有多少盒子使用该结构
+      display: '1', //是否显示
+      goods: [{ //商品
         goodId: 'G000000001',
         goodName: '好丽友',
         cost: 2.8,
@@ -69,6 +69,8 @@ Page({
       good: '',
     })
     this.getAllCate();
+    this.getAllStructure();
+
   },
 
   /**
@@ -164,6 +166,31 @@ Page({
         } else if (res.cancel) {
           console.log('用户点击取消');
         }
+      }
+    })
+  },
+
+  getAllStructure:function(e){
+
+    wx.request({
+      url: app.globalData.serverIp + 'GetCommodityStruct.do',
+      data: {
+        openid: app.globalData.openid
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log("structure");
+        console.log(res.data);
+        // self.setData({
+        //   cate: res.data
+        // })
+        // wx.hideLoading();
+      },
+      fail: function (res) {
+        console.log("faile");
       }
     })
   },

@@ -1,6 +1,6 @@
 // pages/good/good_add/good_add.js
 const app = getApp()
-var isEdit='true'
+var isEdit = 'true'
 const upng = require('../../../utils/UPNG.js')
 
 Page({
@@ -9,49 +9,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-    structureItem: {
-      structureId: '',//编号
-      name: '盒子A',//结构名字
-      remarks: '用于新用户',//备注
-      goodsTypeQuantity: 0,//商品种类
-      goodSum: 0,//商品数量
-      cost: 0,//商品成本
-      price: 0,//商品售价
-      createTime: 0,
-      lastEditTime: 0,
-      useNum: 0,//共有多少盒子使用该结构
-      display: '1',//是否显示
-      goods: [{//商品
-        goodId: 'G000000001',
-        goodName: '好丽友',
-        cost: 2.8,
-        price: 3.5,
-        sum: 2
-      }, {
-        goodId: 'G000000002',
-        goodName: '千叶面包',
-        cost: 1.3,
-        price: 2,
-        sum: 3
-      }, {
-        goodId: 'G000000003',
-        goodName: '八宝粥',
-        cost: 3.8,
-        price: 4.5,
-        sum: 2
-      }]
+    struct: {
+      structId: '', //编号
+      structName: '', //结构名字
+      structRemark: '', //备注
+      commodityKind: 0, //商品种类
+      commodityNum: 0, //商品数量
+      commodityCost: 0, //商品成本
+      commodityPrice: 0, //商品售价
+      commodityUse: 0, //共有多少盒子使用该结构
+      structDisplay: '0', //是否显示
     },
-    isEdit:'false',
-    goodsArray: [[], []],
-    goodsSource:[]
+    goods: [],
+
+    isEdit: 'false',
+    goodsArray: [
+      [],
+      []
+    ],
+    goodsSource: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var self = this;
-
+    this.data.isEdit = options.isEdit
     isEdit = options.isEdit;
     console.log(isEdit);
     //编辑
@@ -120,30 +104,28 @@ Page({
   onShareAppMessage: function() {
 
   },
-  good_delete: function (e) {
+  good_delete: function(e) {
     let goodIndex = e.currentTarget.dataset.index;
-    this.data.structureItem.goods.splice(goodIndex,1);
+    this.data.goods.splice(goodIndex, 1);
     this.setData({
-      structureItem:this.data.structureItem
+      goods: this.data.goods
     })
-    console.log(this.data.structureItem);
   },
 
 
-  bindMultiPickerGoodChange:function(e){
-    var goodTemp={};
-
+  bindMultiPickerGoodChange: function(e) {
+    var goodTemp = {};
     goodTemp.goodId = this.data.goodsSource[e.detail.value[0]].goodId;
     goodTemp.goodName = this.data.goodsSource[e.detail.value[0]].goodName;
     goodTemp.sum = this.data.goodsArray[1][e.detail.value[1]];
-    this.data.structureItem.goods.push(goodTemp);
+    this.data.goods.push(goodTemp);
     this.setData({
-      structureItem: this.data.structureItem
+      goods: this.data.goods
     })
   },
 
 
-  getAllGood: function () {
+  getAllGood: function() {
     var self = this;
     wx.showLoading({
       title: '正在载入'
@@ -157,23 +139,26 @@ Page({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         self.setGoodsArray(res.data);
         console.log('goods')
         wx.hideLoading();
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log("faile");
       }
     })
   },
 
-  setGoodsArray: function (goods) {
+  setGoodsArray: function(goods) {
     this.data.goodsSource = goods;
-    var goodsArray = [[],[]];
-    for(var i = 0; i < goods.length;i++){
-      goodsArray[0].push(goods[i].goodName); 
+    var goodsArray = [
+      [],
+      []
+    ];
+    for (var i = 0; i < goods.length; i++) {
+      goodsArray[0].push(goods[i].goodName);
     }
     goodsArray[1] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
     this.setData({
@@ -181,73 +166,39 @@ Page({
     })
   },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  bindGoodNameInput: function(e) {
-    var goodName = e.detail.value
-    this.data.good.goodName = goodName;
+  bindStructNameInput: function(e) {
+    var structName = e.detail.value
+    this.data.struct.structName = structName;
   },
-  bindPriceInput: function(e) {
-    var price = e.detail.value
-    this.data.good.price = price;
-  },
-  bindGoodUnitInput: function(e) {
-    var goodUnit = e.detail.value
-    this.data.good.goodUnit = goodUnit;
-  },
-  bindReorderInput: function(e) {
-    var reorder = e.detail.value
-    this.data.good.reorder = reorder;
+  bindStructRemarkInput: function(e) {
+    var structRemark = e.detail.value
+    this.data.struct.structRemark = structRemark;
   },
   bindValidChange: function(e) {
     var temp = e.detail.value;
-    this.data.good.valid = temp;
+    this.data.struct.structDisplay = temp;
   },
 
-  bindPickerChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      cateIndex: e.detail.value
-    });
 
-    this.setData({
-      ['good.categoryId']: this.data.cate[parseInt(e.detail.value)].categoryId
-    })
 
-  },
-
-  submit_good_edit: function(e) {
-    console.log(this.data.good);
+  submit_struct: function(e) {
+    console.log(this.data.struct);
     const self = this;
+
     //res带着id，代表其为修改目录，若没有带着id，代表其为增加目录
-    if (this.data.good.goodName != "" && this.data.good.reorder > 0) {
+    if (this.data.struct.structName != "") {
+
       wx.showModal({
-        title: '确认修改',
-        content:"该操作无法撤回,请谨慎操作",
-
+        title: '确认上传',
+        content: "该操作无法撤回,请谨慎操作",
         success: function(res) {
-
           if (res.confirm) {
             console.log('用户点击确定');
-            self.updGood(self.data.good);
+            if (self.data.isEdit == 'true') {
+              self.updStruct(self.data.struct);
+            } else {
+              self.addStruct(self.data.struct);
+            }
             //调用接口
           } else if (res.cancel) {
             console.log('用户点击取消');
@@ -256,143 +207,104 @@ Page({
       })
     } else {
       wx.showModal({
-        content: '请填写全部目录信息',
+        content: '请填写结构名',
         showCancel: false
       })
     }
   },
 
-  updGood: function(good) {
+  machStruct:function(struct){
+    if (struct.structId == undefined) {
+      struct.structId = '';
+    }
+    if (struct.structName == undefined) {
+      struct.structName = '';
+    }
+    if (struct.structRemark == undefined) {
+      struct.structRemark = '';
+    }
+    if (struct.commodityCost == undefined) {
+      struct.commodityCost = '0';
+    }
+    if (struct.commodityPrice == undefined) {
+      struct.commodityPrice = '0';
+    }
+    if (struct.commodityKind == undefined) {
+      struct.commodityKind = '0';
+    }
+    if (struct.commodityNum == undefined) {
+      struct.commodityNum = '0';
+    }
+    if (struct.commodityUse == undefined) {
+      struct.commodityUse = '0';
+    }
+    if (struct.structDisplay == undefined) {
+      struct.structDisplay = '0';
+    }
+  },
 
-    console.log(good.goodId);
-    if (good.goodId == undefined) {
-      good.goodId = '';
-    }
-    if (good.goodId == undefined){
-      good.saleVolume = 0;
-    }
-    if (good.salePrice == undefined) {
-      good.salePrice = 0;
-    }
-    if(good.valid == undefined){
-      good.valid = '1';
-    }
-    if(good.reorder == undefined){
-      good.reorder = '1';
-    }
-    if(good.saleVolume == undefined){
-      good.saleVolume = 0;
-    }
+  addStruct: function (struct) {
+    var self = this;
+    this.machStruct(struct);
     wx.showLoading({
       title: '正在载入'
     })
     wx.request({
-      url: app.globalData.serverIp + 'updGood.do',
+      url: app.globalData.serverIp + 'AddCommodityStruct.do',
       data: {
-        goodId: good.goodId,
-        price: good.price,
-        salePrice: good.salePrice,
-        goodName: good.goodName,
-        goodPic: good.goodPic,
-        goodBrief: good.goodBrief,
-        saleVolume: good.saleVolume,
-        goodType: good.goodType,
-        goodUnit: good.goodUnit,
-        categoryId: good.categoryId,
-        valid: good.valid,
-        reorder: good.reorder,
-        openid: app.globalData.openid
+        structName: struct.structName,
+        structRemark: struct.structRemark,
+        structDisplay: struct.structDisplay,
+        commodityNum: '0',
+        commodityKind: '0',
+        commodityCost: '0',
+        commodityPrice: '0',
+        commodityUse: '0',
+
       },
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function(res) {
+      success: function (res) {
+        console.log(res.data);
+        self.addGoods(self.data.goods,res.data);
+      },
+      fail: function (res) {
+        console.log("faile");
+      }
+    })
+  },
+
+  addGoods: function (goods,strcutId) {
+    var self = this;
+    var goodsRes = [];
+    for (var i = 0; i < goods.length; i++) {
+      var goodTemp = {};
+      goodTemp.STRUCT_ID = strcutId;
+      goodTemp.GOOD_ID = goods[i].goodId;
+      goodTemp.GOOD_SUM = goods[i].sum;
+      goodsRes.push(goodTemp);
+    }
+    var temp = JSON.stringify(goodsRes);
+    console.log(temp);
+    wx.request({
+      url: app.globalData.serverIp + 'AddStructGood.do',
+      data: temp,
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
         console.log(res.data);
         wx.hideLoading();
         wx.navigateBack({
 
         })
       },
-      fail: function(res) {
+      fail: function (res) {
         console.log("faile");
       }
     })
   },
-
-  chooseImage: function() {
-
-    　　　　　　　　　　
-    const self = this;
-    const platform = wx.getSystemInfoSync().platform;
-
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original'],
-      sourceType: ['album'],
-      success(res) {
-        const canvas = wx.createCanvasContext('page-section-canvas');
-        self.setData({
-          b64: res.tempFilePaths[0]
-        })
-        canvas.drawImage(res.tempFilePaths[0], 0, 0, 100, 100);
-
-        canvas.draw(false, () => {
-          // 2. 获取图像数据
-          wx.canvasGetImageData({
-            canvasId: 'page-section-canvas',
-            x: 0,
-            y: 0,
-            width: 100,
-            height: 100,
-            success(res) {
-              if (platform === 'ios') {
-                // 兼容处理：ios获取的图片上下颠倒 
-                res = self.reverseImgData(res)
-              }
-              // 3. png编码
-              let pngData = upng.encode([res.data.buffer], res.width, res.height)
-              // 4. base64编码
-              let base64 = 'data:image/jpeg;base64,' + wx.arrayBufferToBase64(pngData)
-              self.setData({
-                ["good.goodPic"]: base64
-              })
-            }
-          })
-        })
-
-      }
-    })
-  },
-
-  //ios图片处理 
-  reverseImgData(res) {
-    var w = res.width
-    var h = res.height
-    let con = 0
-    for (var i = 0; i < h / 2; i++) {
-      for (var j = 0; j < w * 4; j++) {
-        con = res.data[i * w * 4 + j]
-        res.data[i * w * 4 + j] = res.data[(h - i - 1) * w * 4 + j]
-        res.data[(h - i - 1) * w * 4 + j] = con
-      }
-    }
-    return res
-  },
-
-  setGoodPic(base64) {
-    const canvas = wx.createCanvasContext('page-section-canvas');
-    canvas.drawImage(base64, 0, 0, 100, 100);
-    canvas.draw(false);
-  },
-
-  getCateIndex(cates, categoryId) {
-    console.log(cates);
-    for (var i = 0; i < cates.length; i++) {
-      if (cates[i].categoryId == categoryId) {
-        return i;
-      }
-    }
-    return 0;
-  }
 })
