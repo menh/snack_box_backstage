@@ -1,5 +1,5 @@
 <view class='page'>
-
+  <view bindtap='addGoods'>test</view>
   <view class="page-section">
     <view class="page-section-title">结构名</view>
     <input class="page-section-input" name="input" placeholder="结构名" value='{{struct.structName}}' bindinput="bindStructNameInput"></input>

@@ -281,9 +281,9 @@ Page({
     var goodsRes = [];
     for (var i = 0; i < goods.length; i++) {
       var goodTemp = {};
-      goodTemp.STRUCT_ID = strcutId;
-      goodTemp.GOOD_ID = goods[i].goodId;
-      goodTemp.GOOD_SUM = goods[i].sum;
+      goodTemp.structId = "strcutId";
+      goodTemp.goodId = "goods[i].goodId";
+      goodTemp.goodNum = "goods[i].sum";
       goodsRes.push(goodTemp);
     }
     var temp = JSON.stringify(goodsRes);
@@ -292,9 +292,7 @@ Page({
       url: app.globalData.serverIp + 'AddStructGood.do',
       data: temp,
       method: 'POST',
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
+      "Content-Type": "applciation/json",
       success: function (res) {
         console.log(res.data);
         wx.hideLoading();
