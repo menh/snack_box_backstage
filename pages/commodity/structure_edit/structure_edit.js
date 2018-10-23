@@ -281,9 +281,9 @@ Page({
     var goodsRes = [];
     for (var i = 0; i < goods.length; i++) {
       var goodTemp = {};
-      goodTemp.structId = "strcutId";
-      goodTemp.goodId = "goods[i].goodId";
-      goodTemp.goodNum = "goods[i].sum";
+      goodTemp.structId = strcutId;
+      goodTemp.goodId = goods[i].goodId;
+      goodTemp.goodNum = goods[i].sum;
       goodsRes.push(goodTemp);
     }
     var temp = JSON.stringify(goodsRes);

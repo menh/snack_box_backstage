@@ -207,7 +207,7 @@ Page({
     let structureIndex = e.currentTarget.dataset.index;
     console.log(structureIndex);
     wx.navigateTo({
-      url: "/pages/commodity/structure_edit/structure_edit?isEdit=true&structureItem=" + JSON.stringify(this.data.structure[structureIndex]),
+      url: "/pages/commodity/structure_edit/structure_edit?isEdit=true&structItem=" + JSON.stringify(this.data.structs[structureIndex]),
     })
   },
 
@@ -426,7 +426,7 @@ Page({
     console.log(structId);
     wx.showLoading({
       title: '正在载入'
-    })
+    }) 
     wx.request({
       url: app.globalData.serverIp + 'DelCommodityStruct.do',
       data: {
