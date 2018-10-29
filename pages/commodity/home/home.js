@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    navActive: '2',
+    navActive: '0',
     //排序按照优先字段来
     cate: [],
 

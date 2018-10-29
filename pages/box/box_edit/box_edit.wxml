@@ -1,0 +1,67 @@
+<view class='page'>
+  <view class="page-section">
+    <view class="page-section-title">盒子编号</view>
+    <input class="page-section-input" name="input" type='number' placeholder="盒子编号" value='{{box.boxId}}' data-name='boxId' bindinput="bindInput"></input>
+  </view>
+  <view class="page-section">
+    <view class="page-section-title">学校</view>
+    <view class='page-section-input'>
+      <view class="page-section-input-explain">当前选择</view>
+      <picker class="page-section-input-picker" data-name='school' bindchange="bindPickerChange" value="{{schoolIndex}}" range="{{school}}">
+        <view class="page-section-input-picker-view">{{school[schoolIndex]}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="page-section">
+    <view class="page-section-title">宿舍楼栋</view>
+    <input class="page-section-input" name="input" placeholder="例如:k栋" value='{{box.dormitory}}' data-name='dormitory' bindinput="bindInput"></input>
+  </view>
+  <view class="page-section">
+    <view class="page-section-title">宿舍号</view>
+    <input class="page-section-input" name="input" type='number' placeholder="例如:345" value='{{box.room}}' data-name='room' bindinput="bindInput"></input>
+  </view>
+  <view class="page-section">
+    <view class="page-section-title">年级</view>
+    <view class='page-section-input'>
+      <view class="page-section-input-explain">当前选择</view>
+      <picker class="page-section-input-picker"  data-name='grade' bindchange="bindPickerChange" value="{{gradeIndex}}" range="{{grade}}">
+        <view class="page-section-input-picker-view">{{grade[gradeIndex]}}</view>
+      </picker>
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="page-section-title">性别</view>
+    <radio-group class='page-section-radio' data-name='sex' name="radio" bindchange="bindRadioChange">
+      <radio value="未知" checked="{{box.sex==='未知'?true:false}}">未知</radio>
+      <radio value="男" checked="{{box.sex==='男'?true:false}}">男</radio>
+      <radio value="女" checked="{{box.sex==='女'?true:false}}">女</radio>
+    </radio-group>
+  </view>
+  <view class="page-section">
+    <view class="page-section-title">加入时间</view>
+    <view class='page-section-input'>
+      <view class="page-section-input-explain">当前选择</view>
+
+      <picker class="page-section-input-picker"  mode="multiSelector"   data-name='attendDate'  bindchange="bindPickerChange" value="{{attendDateIndex}}" range="{{date}}">
+        <view class="page-section-input-picker-view">{{date[0][attendDateIndex[0]]}}{{date[1][attendDateIndex[1]]}} {{date[2][attendDateIndex[2]]}}:{{date[3][attendDateIndex[3]]}}</view>
+      </picker>
+
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="page-section-title">最后补货时间</view>
+    <view class='page-section-input'>
+      <view class="page-section-input-explain">当前选择</view>
+      <picker class="page-section-input-picker"  mode="multiSelector"  data-name='lastSuppleDate'  bindchange="bindPickerChange" value="{{lastSuppleDateIndex}}" range="{{date}}">
+        <view class="page-section-input-picker-view">{{date[0][lastSuppleDateIndex[0]]}}{{date[1][lastSuppleDateIndex[1]]}} {{date[2][lastSuppleDateIndex[2]]}}:{{date[3][lastSuppleDateIndex[3]]}}</view>
+      </picker>
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="page-section-title">商品总数</view>
+    <input class="page-section-input" data-name='goodsNum'  name="input" type='number' placeholder="商品总数" value='{{box.goodsNum}}' bindinput="bindInput"></input>
+  </view>
+
+  <button class="page-submit" type="primary" bindtap='submit'>提交</button>
+</view>

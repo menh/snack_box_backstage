@@ -1,7 +1,7 @@
 <scroll-view class='sales'>
   <view class='sales-title'>
     <view class='sales-title-category'>
-      <view class="sales-title-category-title{{navActive === '0' ? '-choose':''}}" data-index="0" catchtap='chooseTime'>今日</view>
+      <view class="sales-title-category-title{{navActive === '0' ? '-choose':''}}" data-index="0"catchtap='chooseTime'>今日</view>
       <view class="sales-title-category-title{{navActive === '4' ? '-choose':''}}" data-index="4" catchtap='chooseTime'>昨日</view>
       <view class="sales-title-category-title{{navActive === '1' ? '-choose':''}}" data-index="1" catchtap='chooseTime'>三日</view>
       <view class="sales-title-category-title{{navActive === '2' ? '-choose':''}}" data-index="2" catchtap='chooseTime'>一周</view>

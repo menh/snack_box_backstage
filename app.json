@@ -1,13 +1,14 @@
 {
   "pages": [
+    "pages/box/home/home",
+    "pages/box/box_edit/box_edit",
     "pages/commodity/home/home",
     "pages/commodity/structure_edit/structure_edit",
     "pages/sales/sales",
     "pages/user/user",
     "pages/commodity/good_edit/good_edit",
     "pages/openid/openid",
-    "pages/commodity/cate_edit/cate_edit",
-    "pages/box/box"
+    "pages/commodity/cate_edit/cate_edit"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -19,7 +20,7 @@
     "color": "#CDCDCD",
     "selectedColor": "#FFFFFF",
     "backgroundColor": "#CF5500",
-    "borderStyle": "black", 
+    "borderStyle": "black",
     "list": [
       {
         "pagePath": "pages/sales/sales",
@@ -28,6 +29,10 @@
       {
         "pagePath": "pages/commodity/home/home",
         "text": "商品管理"
+      },
+      {
+        "pagePath": "pages/box/home/home",
+        "text": "盒子管理"
       },
       {
         "pagePath": "pages/user/user",

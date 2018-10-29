@@ -1,4 +1,155 @@
 
+
+.page {
+  width: 100%;
+  height: 100%;
+  background-color:#f4f4f4;
+}
+
+.page-title{
+  width: 100%;
+  height: 205rpx;
+  background-color:#f4f4f4;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-title-category{
+  width: 100%;
+  height: 100rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+
+.page-title-category-title-choose{
+  width: 375rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: #CF5500;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.page-title-category-title{
+  width: 375rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: #000000;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+
+
+.page-title-data{
+  width: 100%;
+  height: 100rpx;
+  margin-top: 5rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.page-title-data-class{
+  width: 750rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.page-title-data-class-data{
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-top: 10rpx;
+  color: #CF5500;
+  font-size: 40rpx;
+  text-align: center;
+}
+.page-title-data-class-title{
+  width: 100%;
+  height: 40rpx;
+  line-height: 40rpx;
+  color: #9A9A9A;
+  font-size: 23rpx;
+  text-align: center;
+}
+
+.page-title-opera{
+  width: 100%;
+  height: 100rpx;
+  margin-top: 5rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.page-title-opera-class{
+  width: 750rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.page-title-opera-class-image{
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: 15rpx;
+  margin-bottom: 5rpx;
+  align-self: center;
+}
+.page-title-opera-class-title{
+  width: 100%;
+  height: 30rpx;
+  line-height: 30rpx;
+  color: #9A9A9A;
+  font-size: 18rpx;
+  text-align: center;
+}
+
+
+
+.page-content {
+  width: 100%;
+  margin-top: 10rpx;
+}
+
+.page-content-item{
+  width: 730rpx;
+  height: 200rpx;
+  line-height: 100%;
+  border-radius: 8rpx;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+}
+
+.page-content-item-img{
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 15rpx;
+}
+
+.page-content-item-property{
+  width: 230rpx;
+  margin-left: 20rpx;
+  line-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.page-content-item-property-content{
+  margin-bottom: 6rpx;
+  color: #808080;
+  font-size: 25rpx;
+}
+
 checkbox, radio{
   margin-right: 40rpx;
 }
@@ -7,6 +158,8 @@ button{
   margin-top: 20rpx;
   margin-bottom: 20rpx;
 }
+
+
 
 .page-section-title{
   margin-left: 30rpx;
@@ -37,4 +190,23 @@ button{
 
 .page-section-radio{
   margin-left: 30rpx;
+}
+
+.page-section{
+  margin-top: 20rpx;
+}
+
+.page-section-input-picker-view {
+  width: 100%;
+  height: 100%;
+}
+
+
+.page-section-input-explain {
+  width: 190rpx;
+}
+
+.page-section-input-picker {
+  width: 550rpx;
+  height: 100%;
 }
