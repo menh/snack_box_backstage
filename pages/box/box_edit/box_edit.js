@@ -246,6 +246,8 @@ Page({
       },
       fail: function (res) {
         console.log("faile");
+        console.log(res.data);
+        wx.hideLoading();
       }
     })
   },

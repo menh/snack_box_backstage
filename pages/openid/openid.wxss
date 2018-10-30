@@ -14,7 +14,7 @@ page{
   text-align: center;
   font-size: 36rpx;
   color: white;
-  background-color:#CF5500;
+  background-color:#267BD9;
 }
 
 .id-show{

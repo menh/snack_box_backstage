@@ -25,7 +25,7 @@ page {
   height: 100rpx;
   line-height: 100rpx;
   text-align: center;
-  color: #cf5500;
+  color: #267BD9;
   font-size: 36rpx;
   font-weight: bold;
 }

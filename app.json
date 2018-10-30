@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/commodity/home/home",
+    "pages/box/box_search/box_search",
     "pages/box/home/home",
+    "pages/commodity/home/home",
     "pages/box/box_edit/box_edit",
     "pages/commodity/structure_edit/structure_edit",
     "pages/sales/sales",
@@ -12,14 +13,14 @@
   ],
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#CF5500",
+    "navigationBarBackgroundColor": "#267BD9",
     "navigationBarTitleText": "宅宅快乐盒后台",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#CDCDCD",
     "selectedColor": "#FFFFFF",
-    "backgroundColor": "#CF5500",
+    "backgroundColor": "#267BD9",
     "borderStyle": "black",
     "list": [
       {
@@ -33,10 +34,6 @@
       {
         "pagePath": "pages/box/home/home",
         "text": "盒子管理"
-      },
-      {
-        "pagePath": "pages/user/user",
-        "text": "用户管理"
       }
     ]
   }

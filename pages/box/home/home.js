@@ -103,18 +103,6 @@ Page({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-
-      attendDate: '20180809133420',
-      attendDateDay: '08月09日',
-      attendDateTime: '13:34:20',
-      lastSuppleDate: '20180809133420',
-      lastSuppleDateDay: '08月09日',
-      lastSuppleDateTime: '13:34:20',
-      lastPurchaseDate: '20180810143920',
-      lastPurchaseDateDay: '08月09日',
-      lastPurchaseDateTime: '13:34:20',
-
-
       success: function(res) {
         console.log(res.data)
         var temp = res.data;

@@ -26,13 +26,9 @@
         <image class='page-title-opera-class-image' src='/image/add2.png' />
         <view class='page-title-opera-class-title'>添加盒子</view>
       </view>
-      <view class='page-title-opera-class' data-url='/pages/box/box_edit/box_edit?isEdit=false' bindtap='bindtapNavigate'>
+      <view class='page-title-opera-class' data-url='/pages/box/box_search/box_search?haveBox=false' bindtap='bindtapNavigate'>
         <image class='page-title-opera-class-image' src='/image/search.png' />
         <view class='page-title-opera-class-title'>查找盒子</view>
-      </view>
-      <view class='page-title-opera-class' data-url='/pages/box/box_edit/box_edit?isEdit=false' bindtap='bindtapNavigate'>
-        <image class='page-title-opera-class-image' src='/image/openBox.png' />
-        <view class='page-title-opera-class-title'>补货</view>
       </view>
     </view>
 
@@ -46,11 +42,11 @@
 
       <view class='page-content-item-property'>
         <view class='page-content-item-property-content'>
-          <label class='page-info-text-label' style='color:#CF5500;font-weight: bold'>{{box_item.boxId}}</label>
+          <label class='page-info-text-label' style='color:#267BD9;font-weight: bold'>{{box_item.boxId}}</label>
         </view>
         <view class='page-content-item-property-content'>{{box_item.sex}}</view>
         <view class='page-content-item-property-content'>{{box_item.school}}</view>
-        <view class='page-content-item-property-content' style='color:#CF5500;font-weight:bold'>{{box_item.dormitory}} {{box_item.room}}</view>
+        <view class='page-content-item-property-content' style='color:#267BD9;font-weight:bold'>{{box_item.dormitory}} {{box_item.room}}</view>
       </view>
 
       <view class='page-content-item-data'>
@@ -71,8 +67,8 @@
           </view>
           <view class='page-content-item-data-colum-item'>
             <view class='page-content-item-data-colum-item-data'>
-              <view class='page-content-item-data-colum-item-data-day' style='color:#CF5500;font-weight:bold'>{{box_item.lastPurchaseDateDay}}</view>
-              <view class='page-content-item-data-colum-item-data-time' style='color:#CF5500;font-weight:bold'>{{box_item.lastPurchaseDateTime}}</view>
+              <view class='page-content-item-data-colum-item-data-day' style='color:#267BD9;font-weight:bold'>{{box_item.lastPurchaseDateDay}}</view>
+              <view class='page-content-item-data-colum-item-data-time' style='color:#267BD9;font-weight:bold'>{{box_item.lastPurchaseDateTime}}</view>
             </view>
             <view class='page-content-item-data-colum-item-title'>消费时间</view>
           </view>
@@ -87,7 +83,7 @@
             <view class='page-content-item-data-colum-item-title'>消费件数</view>
           </view>
           <view class='page-content-item-data-colum-item'>
-            <view class='page-content-item-data-colum-item-data' style='color:#CF5500;font-weight:bold'>{{box_item.sellRatio}}</view>
+            <view class='page-content-item-data-colum-item-data' style='color:#267BD9;font-weight:bold'>{{box_item.sellRatio}}</view>
             <view class='page-content-item-data-colum-item-title'>消费比例</view>
           </view>
         </view>
