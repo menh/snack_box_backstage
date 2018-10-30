@@ -209,10 +209,10 @@ Page({
      box.lastPurchaseDate = '';
     }
     if (box.sellNum == undefined) {
-      box.sellNum = 0;
+      box.sellNum = '';
     }
     if (box.sellRatio == undefined) {
-      box.sellRatio = 0;
+      box.sellRatio = '';
     } 
     wx.showLoading({
       title: '正在载入'

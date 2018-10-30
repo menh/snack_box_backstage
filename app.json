@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/commodity/home/home",
     "pages/box/home/home",
     "pages/box/box_edit/box_edit",
-    "pages/commodity/home/home",
     "pages/commodity/structure_edit/structure_edit",
     "pages/sales/sales",
     "pages/user/user",

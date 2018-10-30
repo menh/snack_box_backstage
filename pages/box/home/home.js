@@ -12,140 +12,7 @@ Page({
       initialGoodQuantity: 0,
       residualGoodQuantity: 0
     },
-    boxs: [{
-      boxId: '000000',
-      school: '广州中医药大学 ',
-      dormitory: 'K栋',
-      room: '343',
-      sex: '男',
-      grade: '大二',
-      attendDate: '20180809133420',
-      attendDateDay: '08月09日',
-      attendDateTime: '13:34:20',
-      lastSuppleDate: '20180809133420',
-      lastSuppleDateDay: '08月09日',
-      lastSuppleDateTime: '13:34:20',
-      lastPurchaseDate: '20180810143920',
-      lastPurchaseDateDay: '08月09日',
-      lastPurchaseDateTime: '13:34:20',
-      goodsNum: '40',
-      sellNum: '30',
-      sellRatio: '0.75'
-    }, {
-      boxId: '000000',
-      school: '广州中医药大学 ',
-      dormitory: 'K栋',
-      room: '343',
-      sex: '男',
-      grade: '大二',
-      attendDate: '20180809133420',
-      attendDateDay: '08月09日',
-      attendDateTime: '13:34:20',
-      lastSuppleDate: '20180809133420',
-      lastSuppleDateDay: '08月09日',
-      lastSuppleDateTime: '13:34:20',
-      lastPurchaseDate: '20180810143920',
-      lastPurchaseDateDay: '08月09日',
-      lastPurchaseDateTime: '13:34:20',
-      goodsNum: '40',
-      sellNum: '30',
-      sellRatio: '0.75'
-    }, {
-      boxId: '000000',
-      school: '广州中医药大学 ',
-      dormitory: 'K栋',
-      room: '343',
-      sex: '男',
-      grade: '大二',
-      attendDate: '20180809133420',
-      attendDateDay: '08月09日',
-      attendDateTime: '13:34:20',
-      lastSuppleDate: '20180809133420',
-      lastSuppleDateDay: '08月09日',
-      lastSuppleDateTime: '13:34:20',
-      lastPurchaseDate: '20180810143920',
-      lastPurchaseDateDay: '08月09日',
-      lastPurchaseDateTime: '13:34:20',
-      goodsNum: '40',
-      sellNum: '30',
-      sellRatio: '0.75'
-    }, {
-      boxId: '000000',
-      school: '广州中医药大学 ',
-      dormitory: 'K栋',
-      room: '343',
-      sex: '男',
-      grade: '大二',
-      attendDate: '20180809133420',
-      attendDateDay: '08月09日',
-      attendDateTime: '13:34:20',
-      lastSuppleDate: '20180809133420',
-      lastSuppleDateDay: '08月09日',
-      lastSuppleDateTime: '13:34:20',
-      lastPurchaseDate: '20180810143920',
-      lastPurchaseDateDay: '08月09日',
-      lastPurchaseDateTime: '13:34:20',
-      goodsNum: '40',
-      sellNum: '30',
-      sellRatio: '0.75'
-    }, {
-      boxId: '000000',
-      school: '广州中医药大学 ',
-      dormitory: 'K栋',
-      room: '343',
-      sex: '男',
-      grade: '大二',
-      attendDate: '20180809133420',
-      attendDateDay: '08月09日',
-      attendDateTime: '13:34:20',
-      lastSuppleDate: '20180809133420',
-      lastSuppleDateDay: '08月09日',
-      lastSuppleDateTime: '13:34:20',
-      lastPurchaseDate: '20180810143920',
-      lastPurchaseDateDay: '08月09日',
-      lastPurchaseDateTime: '13:34:20',
-      goodsNum: '40',
-      sellNum: '30',
-      sellRatio: '0.75'
-    }, {
-      boxId: '000000',
-      school: '广州中医药大学 ',
-      dormitory: 'K栋',
-      room: '343',
-      sex: '男',
-      grade: '大二',
-      attendDate: '20180809133420',
-      attendDateDay: '08月09日',
-      attendDateTime: '13:34:20',
-      lastSuppleDate: '20180809133420',
-      lastSuppleDateDay: '08月09日',
-      lastSuppleDateTime: '13:34:20',
-      lastPurchaseDate: '20180810143920',
-      lastPurchaseDateDay: '08月09日',
-      lastPurchaseDateTime: '13:34:20',
-      goodsNum: '40',
-      sellNum: '30',
-      sellRatio: '0.75'
-    }, {
-      boxId: '000000',
-      school: '广州中医药大学 ',
-      dormitory: 'K栋',
-      room: '343',
-      sex: '男',
-      grade: '大二',
-      attendDate: '20180809133420',
-      attendDateDay: '08月09日',
-      attendDateTime: '13:34:20',
-      lastSuppleDate: '20180809133420',
-      lastSuppleDateDay: '08月09日',
-      lastSuppleDateTime: '13:34:20',
-      lastPurchaseDate: '20180810143920',
-      lastPurchaseDateDay: '08月09日',
-      lastPurchaseDateTime: '13:34:20',
-      goodsNum: '40',
-      sellNum: '30',
-      sellRatio: '0.75'
-    }, ]
+    boxs: []
   },
 
   /**
@@ -219,6 +86,7 @@ Page({
 
 
   chooseTitle: function(e) {
+    var self = this;
     let index = e.currentTarget.dataset.index;
     console.log(index);
     this.setData({
@@ -229,18 +97,68 @@ Page({
       url: app.globalData.serverIp + 'SelBox.do',
       data: {
         orderParam: "boxId",
-        orderFlag: 1
+        orderFlag: 0
       },
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
+
+      attendDate: '20180809133420',
+      attendDateDay: '08月09日',
+      attendDateTime: '13:34:20',
+      lastSuppleDate: '20180809133420',
+      lastSuppleDateDay: '08月09日',
+      lastSuppleDateTime: '13:34:20',
+      lastPurchaseDate: '20180810143920',
+      lastPurchaseDateDay: '08月09日',
+      lastPurchaseDateTime: '13:34:20',
+
+
       success: function(res) {
         console.log(res.data)
+        var temp = res.data;
+        for(var i = 0; i < temp.length; i++){
+          temp[i].attendDateDay = self.getDayFromDate(temp[i].attendDate);
+          temp[i].attendDateTime = self.getTimeFromDate(temp[i].attendDate);
+          temp[i].lastSuppleDateDay = self.getDayFromDate(temp[i].lastSuppleDate);
+          temp[i].lastSuppleDateTime = self.getTimeFromDate(temp[i].lastSuppleDate);
+          temp[i].lastPurchaseDateDay = self.getDayFromDate(temp[i].lastPurchaseDate);
+          temp[i].lastPurchaseDateTime = self.getTimeFromDate(temp[i].lastPurchaseDate);
+        }
+
+        self.setData({
+          boxs:temp
+        })
       },
       fail: function(res) {
         console.log("faile");
       }
     })
   },
+
+
+  getDayFromDate: function (date) {
+    var day = '';
+    if (date.length < 8) {
+      return day;
+    }
+    day += date.substr(4, 2);
+    day += '月';
+    day += date.substr(6, 2);
+    day += '日'
+    return day;
+  },
+  getTimeFromDate: function (date) {
+    var time = '';
+    if (date.length < 14){
+      return time;
+    }
+    time += date.substr(8, 2);
+    time += ':'
+    time += date.substr(10, 2);
+    time += ':'
+    time += date.substr(12, 2);
+    return time;
+  }
 })
