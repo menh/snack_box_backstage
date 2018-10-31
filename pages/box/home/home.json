@@ -1,1 +1,5 @@
-{}
+{
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f4f4f4",
+  "navigationBarTitleText": "盒子管理"
+}

@@ -79,7 +79,6 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
   },
 
   /**
@@ -270,7 +269,6 @@ Page({
         })
 
         self.getAllGood();
-        // wx.hideLoading();
       },
       fail: function(res) {
         console.log("faile");
@@ -314,9 +312,6 @@ Page({
 
   getAllGood: function() {
     var self = this;
-    wx.showLoading({
-      title: '正在载入'
-    });
     wx.request({
       url: app.globalData.serverIp + 'getAllGood.do',
       data: {
@@ -403,7 +398,6 @@ Page({
       },
       success: function (res) {
         console.log(res.data);
-        wx.hideLoading();
         if (res.data) {
           self.getAllGood()
         } else {
