@@ -8,7 +8,7 @@
 
     <view class='page-title-data'>
       <view class='page-title-data-class'>
-        <view class='page-title-data-class-data'>{{countData.goodNum}}</view>
+        <view class='page-title-data-class-data'>{{countData.boxNum}}</view>
         <view class='page-title-data-class-title'>盒子总数</view>
       </view>
       <view class='page-title-data-class'>
@@ -26,13 +26,9 @@
         <image class='page-title-opera-class-image' src='/image/add2.png' />
         <view class='page-title-opera-class-title'>添加盒子</view>
       </view>
-      <view class='page-title-opera-class' data-url='/pages/box/box_edit/box_edit?isEdit=false' bindtap='bindtapNavigate'>
+      <view class='page-title-opera-class' data-url='/pages/box/box_search/box_search?showBox=false' bindtap='bindtapNavigate'>
         <image class='page-title-opera-class-image' src='/image/search.png' />
         <view class='page-title-opera-class-title'>查找盒子</view>
-      </view>
-      <view class='page-title-opera-class' data-url='/pages/box/box_edit/box_edit?isEdit=false' bindtap='bindtapNavigate'>
-        <image class='page-title-opera-class-image' src='/image/openBox.png' />
-        <view class='page-title-opera-class-title'>补货</view>
       </view>
     </view>
 
@@ -40,60 +36,64 @@
 
 
   <view class='page-content'>
-    <view class='page-content-item' wx:for="{{boxs}}" wx:for-item="box_item" wx:key="{{index}}">
+    <view wx:for="{{boxs}}" wx:for-item="box_item" wx:key="{{index}}">
+      <view class='page-content-item' data-url='/pages/box/box_search/box_search?showBox=true&boxId={{box_item.boxId}}' bindtap='bindtapNavigate'>
 
-      <image class='page-content-item-img' src='/image/box.png'></image>
+        <image class='page-content-item-img' src='/image/box.png'></image>
 
-      <view class='page-content-item-property'>
-        <view class='page-content-item-property-content'>
-          <label class='page-info-text-label' style='color:#CF5500;font-weight: bold'>{{box_item.boxId}}</label>
+        <view class='page-content-item-property'>
+          <view class='page-content-item-property-content'>
+            <label class='page-info-text-label' style='color:#267BD9;font-weight: bold'>{{box_item.boxId}}</label>
+          </view>
+          <view class='page-content-item-property-content'>{{box_item.grade}} {{box_item.sex}}</view>
+          <view class='page-content-item-property-content'>{{box_item.school}}</view>
+          <view class='page-content-item-property-content' style='color:#267BD9;font-weight:bold'>{{box_item.dormitory}} {{box_item.room}}</view>
         </view>
-        <view class='page-content-item-property-content'>{{box_item.sex}}</view>
-        <view class='page-content-item-property-content'>{{box_item.school}}</view>
-        <view class='page-content-item-property-content' style='color:#CF5500;font-weight:bold'>{{box_item.dormitory}} {{box_item.room}}</view>
-      </view>
 
-      <view class='page-content-item-data'>
-        <view class='page-content-item-data-colum'>
-          <view class='page-content-item-data-colum-item'>
-            <view class='page-content-item-data-colum-item-data'>
-              <view class='page-content-item-data-colum-item-data-day'>{{box_item.attendDateDay}}</view>
-              <view class='page-content-item-data-colum-item-data-time'>{{box_item.attendDateTime}}</view>
+        <view class='page-content-item-data'>
+          <view class='page-content-item-data-colum'>
+            <view class='page-content-item-data-colum-item'>
+              <view class='page-content-item-data-colum-item-data'>
+                <view class='page-content-item-data-colum-item-data-day'>{{box_item.attendDateDay}}</view>
+                <view class='page-content-item-data-colum-item-data-time'>{{box_item.attendDateTime}}</view>
+              </view>
+              <view class='page-content-item-data-colum-item-title'>加入时间</view>
             </view>
-            <view class='page-content-item-data-colum-item-title'>加入时间</view>
+            <view class='page-content-item-data-colum-item'>
+              <view class='page-content-item-data-colum-item-data'>
+                <view class='page-content-item-data-colum-item-data-day' style='color:#267BD9;font-weight:bold'>{{box_item.lastSuppleDateDay}}</view>
+                <view class='page-content-item-data-colum-item-data-time' style='color:#267BD9;font-weight:bold'>{{box_item.lastSuppleDateTime}}</view>
+              </view>
+              <view class='page-content-item-data-colum-item-title'>补货时间</view>
+            </view>
+            <view class='page-content-item-data-colum-item'>
+              <view class='page-content-item-data-colum-item-data'>
+                <view class='page-content-item-data-colum-item-data-day' >{{box_item.lastPurchaseDateDay}}</view>
+                <view class='page-content-item-data-colum-item-data-time' >{{box_item.lastPurchaseDateTime}}</view>
+              </view>
+              <view class='page-content-item-data-colum-item-title'>消费时间</view>
+            </view>
           </view>
-          <view class='page-content-item-data-colum-item'>
-            <view class='page-content-item-data-colum-item-data'>
-              <view class='page-content-item-data-colum-item-data-day'>{{box_item.lastSuppleDateDay}}</view>
-              <view class='page-content-item-data-colum-item-data-time'>{{box_item.lastSuppleDateTime}}</view>
+          <view class='page-content-item-data-colum' style='margin-bottom:0rpx'>
+            <view class='page-content-item-data-colum-item'>
+              <view class='page-content-item-data-colum-item-data' style='color:#267BD9;font-weight:bold'>{{box_item.goodsNum}}</view>
+              <view class='page-content-item-data-colum-item-title'>初始件数</view>
             </view>
-            <view class='page-content-item-data-colum-item-title'>补货时间</view>
-          </view>
-          <view class='page-content-item-data-colum-item'>
-            <view class='page-content-item-data-colum-item-data'>
-              <view class='page-content-item-data-colum-item-data-day' style='color:#CF5500;font-weight:bold'>{{box_item.lastPurchaseDateDay}}</view>
-              <view class='page-content-item-data-colum-item-data-time' style='color:#CF5500;font-weight:bold'>{{box_item.lastPurchaseDateTime}}</view>
+            <view class='page-content-item-data-colum-item'>
+              <view class='page-content-item-data-colum-item-data'>{{box_item.sellNum}}</view>
+              <view class='page-content-item-data-colum-item-title'>消费件数</view>
             </view>
-            <view class='page-content-item-data-colum-item-title'>消费时间</view>
+            <view class='page-content-item-data-colum-item'>
+              <view class='page-content-item-data-colum-item-data'>{{box_item.sellRatio}}</view>
+              <view class='page-content-item-data-colum-item-title'>消费比例</view>
+            </view>
           </view>
         </view>
-        <view class='page-content-item-data-colum' style='margin-bottom:0rpx'>
-          <view class='page-content-item-data-colum-item'>
-            <view class='page-content-item-data-colum-item-data'>{{box_item.goodsNum}}</view>
-            <view class='page-content-item-data-colum-item-title'>初始件数</view>
-          </view>
-          <view class='page-content-item-data-colum-item'>
-            <view class='page-content-item-data-colum-item-data'>{{box_item.sellNum}}</view>
-            <view class='page-content-item-data-colum-item-title'>消费件数</view>
-          </view>
-          <view class='page-content-item-data-colum-item'>
-            <view class='page-content-item-data-colum-item-data' style='color:#CF5500;font-weight:bold'>{{box_item.sellRatio}}</view>
-            <view class='page-content-item-data-colum-item-title'>消费比例</view>
-          </view>
-        </view>
+
       </view>
 
     </view>
+
 
   </view>
 </view>

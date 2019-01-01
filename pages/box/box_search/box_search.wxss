@@ -1,0 +1,18 @@
+page {
+  width: 100%;
+  background-color:#f4f4f4;
+}
+.page-content-item{
+  width: 100%;
+  border-radius: 0rpx;
+  margin-bottom: 8rpx;
+}
+
+.memo{
+  width: 100%;
+  margin-top: 15rpx;
+  margin-bottom: 15rpx;
+  font-size: 22rpx;
+  text-align: center;
+  color: #808080
+}

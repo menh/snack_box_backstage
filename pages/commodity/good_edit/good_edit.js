@@ -277,10 +277,10 @@ Page({
             width: 100,
             height: 100,
             success(res) {
-              if (platform === 'ios') {
-                // 兼容处理：ios获取的图片上下颠倒 
-                res = self.reverseImgData(res)
-              }
+              // if (platform === 'ios') {
+              //   // 兼容处理：ios获取的图片上下颠倒 
+              //   res = self.reverseImgData(res)
+              // }
               // 3. png编码
               let pngData = upng.encode([res.data.buffer], res.width, res.height)
               // 4. base64编码

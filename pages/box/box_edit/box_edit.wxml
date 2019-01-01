@@ -1,7 +1,8 @@
 <view class='page'>
   <view class="page-section">
     <view class="page-section-title">盒子编号</view>
-    <input class="page-section-input" name="input" type='number' placeholder="盒子编号" value='{{box.boxId}}' data-name='boxId' bindinput="bindInput"></input>
+    <input class="page-section-input-disabled"  wx:if="{{isEdit=='true'}}" name="input" type='number' disabled='true'value='{{box.boxId}}'></input>
+    <input class="page-section-input"  wx:if="{{isEdit!='true'}}" name="input" type='number' placeholder="盒子编号" value='{{box.boxId}}' data-name='boxId' bindinput="bindInput"></input>
   </view>
   <view class="page-section">
     <view class="page-section-title">学校</view>
@@ -44,7 +45,7 @@
       <view class="page-section-input-explain">当前选择</view>
 
       <picker class="page-section-input-picker"  mode="multiSelector"   data-name='attendDate'  bindchange="bindPickerChange" value="{{attendDateIndex}}" range="{{date}}">
-        <view class="page-section-input-picker-view">{{date[0][attendDateIndex[0]]}}{{date[1][attendDateIndex[1]]}} {{date[2][attendDateIndex[2]]}}:{{date[3][attendDateIndex[3]]}}</view>
+        <view class="page-section-input-picker-view">{{date[0][attendDateIndex[0]]}}{{date[1][attendDateIndex[1]]}}{{date[2][attendDateIndex[2]]}} {{date[3][attendDateIndex[3]]}}:{{date[4][attendDateIndex[4]]}}:{{date[5][attendDateIndex[5]]}}</view>
       </picker>
 
     </view>
@@ -54,7 +55,7 @@
     <view class='page-section-input'>
       <view class="page-section-input-explain">当前选择</view>
       <picker class="page-section-input-picker"  mode="multiSelector"  data-name='lastSuppleDate'  bindchange="bindPickerChange" value="{{lastSuppleDateIndex}}" range="{{date}}">
-        <view class="page-section-input-picker-view">{{date[0][lastSuppleDateIndex[0]]}}{{date[1][lastSuppleDateIndex[1]]}} {{date[2][lastSuppleDateIndex[2]]}}:{{date[3][lastSuppleDateIndex[3]]}}</view>
+        <view class="page-section-input-picker-view">{{date[0][lastSuppleDateIndex[0]]}}{{date[1][lastSuppleDateIndex[1]]}}{{date[2][lastSuppleDateIndex[2]]}} {{date[3][lastSuppleDateIndex[3]]}}:{{date[4][lastSuppleDateIndex[4]]}}:{{date[5][lastSuppleDateIndex[5]]}}</view>
       </picker>
     </view>
   </view>

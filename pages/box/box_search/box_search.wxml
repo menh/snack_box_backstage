@@ -1,0 +1,99 @@
+<view class='page'>
+  <input class='page-search' type='text' confirm-type='search' placeholder='请输入盒子编号' bindblur='searchBox'></input>
+  <view wx:if="{{showBox==true}}">
+
+
+    <view class='page-content-item'>
+
+      <image class='page-content-item-img' src='/image/box.png'></image>
+
+      <view class='page-content-item-property'>
+        <view class='page-content-item-property-content'>
+          <label class='page-info-text-label' style='color:#267BD9;font-weight: bold'>{{box.boxId}}</label>
+        </view>
+        <view class='page-content-item-property-content'>{{box.grade}} {{box.sex}}</view>
+        <view class='page-content-item-property-content'>{{box.school}}</view>
+        <view class='page-content-item-property-content' style='color:#267BD9;font-weight:bold'>{{box.dormitory}} {{box.room}}</view>
+      </view>
+
+      <view class='page-content-item-data'>
+        <view class='page-content-item-data-colum'>
+          <view class='page-content-item-data-colum-item'>
+            <view class='page-content-item-data-colum-item-data'>
+              <view class='page-content-item-data-colum-item-data-day'>{{box.attendDateDay}}</view>
+              <view class='page-content-item-data-colum-item-data-time'>{{box.attendDateTime}}</view>
+            </view>
+            <view class='page-content-item-data-colum-item-title'>加入时间</view>
+          </view>
+          <view class='page-content-item-data-colum-item'>
+            <view class='page-content-item-data-colum-item-data'>
+              <view class='page-content-item-data-colum-item-data-day' style='color:#267BD9;font-weight:bold'>{{box.lastSuppleDateDay}}</view>
+              <view class='page-content-item-data-colum-item-data-time' style='color:#267BD9;font-weight:bold'>{{box.lastSuppleDateTime}}</view>
+            </view>
+            <view class='page-content-item-data-colum-item-title'>补货时间</view>
+          </view>
+          <view class='page-content-item-data-colum-item'>
+            <view class='page-content-item-data-colum-item-data'>
+              <view class='page-content-item-data-colum-item-data-day'>{{box.lastPurchaseDateDay}}</view>
+              <view class='page-content-item-data-colum-item-data-time'>{{box.lastPurchaseDateTime}}</view>
+            </view>
+            <view class='page-content-item-data-colum-item-title'>消费时间</view>
+          </view>
+        </view>
+        <view class='page-content-item-data-colum' style='margin-bottom:0rpx'>
+          <view class='page-content-item-data-colum-item'>
+            <view class='page-content-item-data-colum-item-data' style='color:#267BD9;font-weight:bold'>{{box.goodsNum}}</view>
+            <view class='page-content-item-data-colum-item-title'>初始件数</view>
+          </view>
+          <view class='page-content-item-data-colum-item'>
+            <view class='page-content-item-data-colum-item-data'>{{box.sellNum}}</view>
+            <view class='page-content-item-data-colum-item-title'>消费件数</view>
+          </view>
+          <view class='page-content-item-data-colum-item'>
+            <view class='page-content-item-data-colum-item-data'>{{box.sellRatio}}</view>
+            <view class='page-content-item-data-colum-item-title'>消费比例</view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+
+    <view class='page-title-opera'>
+
+      <picker mode="multiSelector" data-name='lastSuppleDate' bindtap='setNewDate' bindchange="changeLastSuppleDate" value="{{lastSuppleDateIndex}}" range="{{date}}">
+        <view class='page-title-opera-class' style='width:250rpx'>
+          <image class='page-title-opera-class-image' src='/image/openBox.png' />
+          <view class='page-title-opera-class-title'>刷新补货</view>
+        </view>
+      </picker>
+
+
+
+      <view class='page-title-opera-class'  data-url='/pages/box/box_edit/box_edit?isEdit=true&boxId={{box.boxId}}' bindtap='bindtapNavigate'>
+        <image class='page-title-opera-class-image' src='/image/edit.png' />
+        <view class='page-title-opera-class-title'>编辑盒子</view>
+      </view>
+      <view class='page-title-opera-class' bindtap='delBox'>
+        <image class='page-title-opera-class-image' src='/image/del.png' />
+        <view class='page-title-opera-class-title'>删除盒子</view>
+      </view>
+    </view>
+
+    <view class='memo'>——本期消费记录——</view>
+
+    <view class='page-order-item' wx:for="{{orders}}" wx:key="{{index}}">
+
+      <image class='page-order-item-img' src='{{item.goodPic}}'></image>
+      <view class='page-order-item-property'>
+        <view class='page-order-item-property-main'>{{item.goodName}}</view>
+        <view class='page-order-item-property-defalut'>{{item.orderDateDay}} {{item.orderDateTime}}</view>
+      </view>
+      <view class='page-order-item-property' style='margin-left:75rpx'>
+        <view class='page-order-item-property-main' style='text-align:right;font-weight:bold;font-size:34rpx;'>{{item.price}}</view>
+        <view class='page-order-item-property-defalut' style='text-align:right'>{{item.openid}}</view>
+      </view>
+
+    </view>
+  </view>
+</view>
