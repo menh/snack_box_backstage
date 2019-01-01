@@ -1,1 +1,3 @@
+
 <view bindtap='wxPay'>购买</view>
+<image class='page-section-picker-image' src ='http://localhost:8080/bubee/getGoodPic.do?goodId=G00000001'>图片</image>
