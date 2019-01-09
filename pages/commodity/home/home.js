@@ -323,10 +323,22 @@ Page({
       },
       success: function(res) {
         console.log(res.data);
-        self.setGoodsCate(res.data);
+        var goods = res.data;
+        self.setGoodsCate(goods);
         console.log("goods");
+
+        // for (var i = 0; i < goods.length; i++) {
+        //   var temp = 'good[' + i + '][1]';
+        //   self.setData({
+        //     [temp]: goods[i]
+        //   }) 
+        // }
+
+        // for(var i = 0; i < goods.length;i++){
+        //   goods[i].goodPic = '/image/snack/food.png';
+        // }
         self.setData({
-          good: res.data
+          good: goods.slice(0,10)
         })
         wx.hideLoading();
 

@@ -1,0 +1,59 @@
+<!--pages/box/box.wxml-->
+<view class='page'>
+  <!--展示模式-->
+
+  <view class='left'>
+    <view wx:for="{{category}}" wx:key="{{index}}">
+      <view wx:if="{{isEdit||item.isShow}}" class="left-category"  data-id="category_{{index}}" data-index="{{index}}" catchtap='chooseType'>{{item.categoryName}}</view>
+    </view>
+  </view>
+
+  <view class='right'>
+
+    <scroll-view class='right-scroll' scroll-y='true' scroll-into-view="{{toView}}" scroll-with-animation='true'> 
+
+      <view wx:for="{{category}}" wx:key="{{index}}">
+        <view wx:if="{{isEdit||item.isShow}}" class="box_cate">
+
+          <view class="box-category" id="category_{{index}}">{{item.categoryName}}</view>
+
+          <view wx:for="{{item.categoryItem}}" wx:for-item="snack_item" wx:key="{{index}}">
+
+            <view wx:if="{{isEdit||snack_item.isShow}}" class='box-snack'>
+              <image class='box-snack-img' src='{{snack_item.goodPic}}' lazy-load='true'></image>
+              <view class='box-snack-property'>
+                <view class='box-snack-name' style='overflow:hidden;'>{{snack_item.goodName}}</view>
+                <view class='box-snack-price'>￥{{snack_item.price/100}}/{{snack_item.goodUnit}}</view>
+              </view>
+              <view wx:if="{{isEdit}}" class='box-snack-operation'>
+                <image wx:if="{{snack_item.commodityNum>0}}" class='box-snack-operation-button' data-id="{{snack_item.goodId}}" bindtap='subtractGood' src='/image/icon/subtract.png'></image>
+                <view wx:if="{{snack_item.commodityNum>0}}" class='box-snack-operation-text'>{{snack_item.commodityNum}}</view>
+                <image class='box-snack-operation-button' data-id="{{snack_item.goodId}}" bindtap='addGood' src='/image/icon/add.png'></image>
+              </view>
+              <view class='box-snack-right' wx:if="{{!isEdit}}">
+                <view class='page-order-item-property' style='width:150rpx;margin-left:15rpx'>
+                  <view class='page-order-item-property-main' style='text-align:right;font-weight:bold;font-size:34rpx;'>{{snack_item.commodityNum}}</view>
+                  <view class='page-order-item-property-defalut' style='text-align:right'>商品数量</view>
+                </view>
+
+                <checkbox class='box-snack-right-checkbox'  ></checkbox>
+              </view>
+
+            </view>
+
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class='right-bottom'>
+      <button class='right-bottom-button-left'>查看备注</button>
+      <button wx:if="{{!isEdit}}" class='right-bottom-button-right' bindtap='changeToEdit'>编辑</button>
+      <button wx:if="{{isEdit}}" class='right-bottom-button-right' bindtap='saveCommodityStructure'>保存</button>
+    </view>
+
+  </view>
+
+
+
+</view>

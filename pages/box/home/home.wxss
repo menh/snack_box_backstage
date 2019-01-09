@@ -7,6 +7,6 @@ page {
 }
 
 .page-title {
-  height: 310rpx;
+  height: 210rpx;
 } 
 

@@ -27,50 +27,10 @@ Page({
       //   orderDate: '20181031202800',
       //   goodPrice: '5.5',
       //   openid: 'askdfjkasdfljamsdfmcaoiwejf_asdjflad'
-      // }, {
-      //   goodPic: '/image/box.png',
-      //   goodName: '洽洽焦糖瓜子',
-      //   orderDate: '20181031202800',
-      //   goodPrice: '5.5',
-      //   openid: 'askdfjkasdfljamsdfmcaoiwejf_asdjflad'
-      // }, {
-      //   goodPic: '/image/box.png',
-      //   goodName: '洽洽焦糖瓜子',
-      //   orderDate: '20181031202800',
-      //   goodPrice: '5.5',
-      //   openid: 'askdfjkasdfljamsdfmcaoiwejf_asdjflad'
-      // }, {
-      //   goodPic: '/image/box.png',
-      //   goodName: '洽洽焦糖瓜子',
-      //   orderDate: '20181031202800',
-      //   goodPrice: '5.5',
-      //   openid: 'askdfjkasdfljamsdfmcaoiwejf_asdjflad'
-      // }, {
-      //   goodPic: '/image/box.png',
-      //   goodName: '洽洽焦糖瓜子',
-      //   orderDate: '20181031202800',
-      //   goodPrice: '5.5',
-      //   openid: 'askdfjkasdfljamsdfmcaoiwejf_asdjflad'
-      // }, {
-      //   goodPic: '/image/box.png',
-      //   goodName: '洽洽焦糖瓜子',
-      //   orderDate: '20181031202800',
-      //   goodPrice: '5.5',
-      //   openid: 'askdfjkasdfljamsdfmcaoiwejf_asdjflad'
-      // }, {
-      //   goodPic: '/image/box.png',
-      //   goodName: '洽洽焦糖瓜子',
-      //   orderDate: '20181031202800',
-      //   goodPrice: '5.5',
-      //   openid: 'askdfjkasdfljamsdfmcaoiwejf_asdjflad'
-      // }, {
-      //   goodPic: '/image/box.png',
-      //   goodName: '洽洽焦糖瓜子',
-      //   orderDate: '20181031202800',
-      //   goodPrice: '5.5',
-      //   openid: 'askdfjkasdfljamsdfmcaoiwejf_asdjflad'
       // }
     ],
+    ordersIndex: 0,
+    ordersType: 0,
     showBox: false,
     date: [
       ['2018年', '2019年'],
@@ -95,6 +55,13 @@ Page({
       this.data.box.boxId = boxId;
       wx.startPullDownRefresh({});
     } else {}
+
+
+
+    // !!!
+    this.data.box.boxId = '000000';
+    wx.startPullDownRefresh({});
+    // !!!
   },
 
   /**
@@ -209,9 +176,7 @@ Page({
 
   searchOneBox: function(boxId) {
     var self = this;
-    wx.showLoading({
-      title: '',
-    });
+
     wx.request({
       url: app.globalData.serverIp + 'GetOneBox.do',
       data: {
@@ -225,7 +190,6 @@ Page({
         var box = res.data;
         if (box.boxId == null || box.boxId.length < 1) {
           wx.stopPullDownRefresh();
-          wx.hideLoading();
           wx.showToast({
             title: '该盒子不存在',
             icon: 'none',
@@ -237,8 +201,19 @@ Page({
             showBox: true
           })
 
+          console.log(box)
+
+
+
+
           var now = self.date2String(new Date());
-          self.getOneBoxOrders(box.boxId, box.lastSuppleDate, now)
+          var lastPurchaseDate = self.string2Date(box.lastPurchaseDate);
+          var begin15 = self.date2String(new Date(lastPurchaseDate - 15 * 24 * 60 * 60 * 1000));
+          var begin30 = self.date2String(new Date(lastPurchaseDate - 30 * 24 * 60 * 60 * 1000));
+
+          self.getOneBoxOrders(box.boxId, box.lastSuppleDate, now, 0);
+          self.getOneBoxOrders(box.boxId, begin15, box.lastPurchaseDate, 1);
+          self.getOneBoxOrders(box.boxId, begin30, box.lastPurchaseDate, 2);
         }
 
 
@@ -259,6 +234,16 @@ Page({
     var seconds = this.formatNumber(date.getSeconds()); //获取当前秒数(0-59)
     return year + month + day + hour + minutes + seconds;
   },
+  string2Date: function(date) {
+    var year = parseInt(date.substr(0, 4));
+    var month = parseInt(date.substr(4, 2)) - 1;
+    var day = parseInt(date.substr(6, 2));
+    var hour = parseInt(date.substr(8, 2));
+    var minutes = parseInt(date.substr(10, 2));
+    var seconds = parseInt(date.substr(12, 2));
+
+    return new Date(year, month, day, hour, minutes, seconds);
+  },
 
 
   formatNumber: function(n) {
@@ -266,7 +251,7 @@ Page({
     return n[1] ? n : '0' + n
   },
 
-  getOneBoxOrders: function(boxId, beginDate, endDate) {
+  getOneBoxOrders: function(boxId, beginDate, endDate, index) {
     var self = this;
     wx.request({
       url: app.globalData.serverIp + 'GetBoxSnackOrderBetweenDate.do',
@@ -281,20 +266,58 @@ Page({
       },
       success: function(res) {
         var orders = res.data.reverse();
-        orders = self.processOrders(orders);
-        console.log(res.data);
+        var ordersConverge = self.convergeOrder(orders);
+        var temp = 'orders[' + index + '][1]';
         self.setData({
-          orders: res.data
+          [temp]: ordersConverge
         })
+
+
+        orders = self.processOrders(orders);
+        temp = 'orders[' + index + '][0]';
+        self.setData({
+          [temp]: orders
+        })
+        console.log(orders);
+        console.log(ordersConverge);
+
         wx.stopPullDownRefresh();
-        wx.hideLoading();
       },
       fail: function(res) {
         console.log("faile");
       }
     })
   },
+ 
+  convergeOrder: function(orders) {
+    var ordersMap = new Map();
+    var ordersConverge = [];
+    for (var order of orders) {
+      var goodId = order.goodId;
+      if (ordersMap.has(goodId)) {
+        ordersMap.get(goodId).sum++;
+      } else {
+        order.sum = 1;
+        ordersMap.set(goodId, order)
+      }
+    };
 
+
+    for (var order of ordersMap) {
+      ordersConverge.push(order[1]);
+    }
+    var compare = function(order1, order2) { //比较函数
+      if (order1.sum > order2.sum) {
+        return -1;
+      } else if (order1.sum < order2.sum) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+    ordersConverge.sort(compare);
+    return ordersConverge;
+  },
   processBox: function(box) {
     var self = this;
     var temp = box;
@@ -314,7 +337,15 @@ Page({
       temp[i].orderDateDay = self.getDayFromDate(temp[i].orderTime);
       temp[i].orderDateTime = self.getTimeFromDate(temp[i].orderTime).substr(0, 5);
       temp[i].openid = '**' + temp[i].openid.substr(temp[i].openid.length - 6);
+
+
+      // //当数组长度超过60可能会引发setData报错
+      // if (i > 50) {
+      //   temp[i].goodPic = '/image/snack/food.png';
+      // }
+
     }
+
     return temp;
   },
 
@@ -376,9 +407,6 @@ Page({
   },
 
   updBox: function(self, box) {
-    wx.showLoading({
-      title: '',
-    });
     wx.request({
       url: app.globalData.serverIp + 'UpdBox.do',
       data: {
@@ -409,7 +437,6 @@ Page({
       fail: function(res) {
         console.log("faile");
         console.log(res.data);
-        wx.hideLoading();
       }
     })
   },
@@ -461,6 +488,23 @@ Page({
 
     this.setData({
       lastSuppleDateIndex: this.data.lastSuppleDateIndex
+    })
+
+  },
+  chooseOrders: function(e) {
+    var self = this;
+    let ordersIndex = parseInt(e.currentTarget.dataset.index);
+
+    console.log(ordersIndex);
+
+    this.setData({
+      ordersIndex: ordersIndex
+    });
+  },
+  changeOrdersType: function(e) {
+    var temp = this.data.ordersType == 0 ? 1 : 0;
+    this.setData({
+      ordersType: temp
     })
 
   }
