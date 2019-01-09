@@ -278,6 +278,7 @@ Page({
 
   addGoods: function (goods,strcutId) {
     var self = this;
+    console.log("addGoods");
     var goodsRes = [];
     for (var i = 0; i < goods.length; i++) {
       var goodTemp = {};

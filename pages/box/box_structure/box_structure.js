@@ -229,6 +229,7 @@ Page({
 
   setStructure: function(self, boxId, category, interfaceName,structId) {
     var structsJson = JSON.stringify(self.getStructsByCategory(category, structId));
+    console.log("setStruct");
     console.log(structsJson);
     wx.showLoading({
       title: '',
@@ -237,9 +238,8 @@ Page({
       url: app.globalData.serverIp + interfaceName + '.do',
       data: structsJson,
       method: 'POST',
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
+      "Content-Type": "applciation/json",
+      
       success: function(res) {
         console.log(res.data);
         wx.hideLoading();
