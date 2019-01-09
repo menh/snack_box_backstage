@@ -71,10 +71,17 @@ App({
   },
   globalData: {
     userInfo: null,
+<<<<<<< HEAD
     //serverIp: 'http://localhost:8080/bubee/',
     // serverIp: 'http://203.195.196.254/snack_box_http/',
      serverIp:'https://www.gzfjcyd.com/snack_box_backstage/',
     // serverIp:'https://www.gzfjcyd.com/snack_box_http/',
+=======
+    serverIp: 'http://localhost:8080/bubee/',
+    //serverIp: 'http://203.195.196.254/snack_box_http/',
+    //serverIp:'https://www.gzfjcyd.com/snack_box_backstage/',
+    //serverIp:'https://www.gzfjcyd.com/snack_box_http/',
+>>>>>>> 7b6471bba5b70fcd0bd816de20804cdfd9c0a831
     openid: '',
     customerId: '',
     // secret: 'd3d7dccc2a338fc4ca1470abe440c4cc',
