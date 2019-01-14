@@ -29,7 +29,8 @@ Page({
       //   openid: 'askdfjkasdfljamsdfmcaoiwejf_asdjflad'
       // }
     ],
-    ordersIndex: 0,
+    structs:[],
+    ordersIndex: 1,
     ordersType: 0,
     showBox: false,
     date: [
@@ -195,25 +196,25 @@ Page({
             icon: 'none',
           })
         } else {
-          box = self.processBox(box);
-          self.setData({
+          box = self.processBox(box); //对时间进行处理
+          console.log(box)
+          self.setData({ //更新box，及其显示模式
             box: box,
             showBox: true
           })
 
-          console.log(box)
-
-
-
-
+          //本期订单
           var now = self.date2String(new Date());
           var lastPurchaseDate = self.string2Date(box.lastPurchaseDate);
-          var begin15 = self.date2String(new Date(lastPurchaseDate - 15 * 24 * 60 * 60 * 1000));
-          var begin30 = self.date2String(new Date(lastPurchaseDate - 30 * 24 * 60 * 60 * 1000));
+          // var begin15 = self.date2String(new Date(lastPurchaseDate - 15 * 24 * 60 * 60 * 1000));
+          // var begin30 = self.date2String(new Date(lastPurchaseDate - 30 * 24 * 60 * 60 * 1000));
+          self.getOneBoxOrders(box.boxId, box.lastSuppleDate, now);
+          // self.getOneBoxOrders(box.boxId, begin15, box.lastPurchaseDate, 1);
+          // self.getOneBoxOrders(box.boxId, begin30, box.lastPurchaseDate, 2);
 
-          self.getOneBoxOrders(box.boxId, box.lastSuppleDate, now, 0);
-          self.getOneBoxOrders(box.boxId, begin15, box.lastPurchaseDate, 1);
-          self.getOneBoxOrders(box.boxId, begin30, box.lastPurchaseDate, 2);
+
+          //本期库存
+          self.getCurrentInventory(self,box.boxId);
         }
 
 
@@ -224,6 +225,64 @@ Page({
     })
 
   },
+
+  getCurrentInventory:function(self, boxId){
+    wx.request({
+      url: app.globalData.serverIp + 'GetBoxRemainGoodStructDetail.do',
+      data: {
+        boxId:boxId
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log('RemainGoodStructDetail:',res.data)
+        self.getBoxRemainGoodStructDetailCallback(self, res.data);
+        // self.updateCateHeight();
+        wx.stopPullDownRefresh();
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '连接失败',
+          icon: 'none'
+        })
+      }
+    })
+
+  },
+
+  getBoxRemainGoodStructDetailCallback: function (self, category) {
+    // category = self.changeGoodPic(category); //图片更改
+    var structs = [];
+    for (var i = 0; i < category.length; i++) {
+      var item = category[i].categoryItem;
+      for (var j = 0; j < item.length; j++) {
+        var good = item[j];
+        if (parseInt(good.remainGoodNum) != 0) {
+          structs.push(good);
+        }
+      }
+    }
+
+
+    var compare = function (order1, order2) { //比较函数
+      if (order1.remainGoodNum > order2.remainGoodNum) {
+        return -1;
+      } else if (order1.remainGoodNum < order2.remainGoodNum) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+    structs.sort(compare);
+
+    console.log(structs);
+    self.setData({
+      structs: structs
+    })
+  },
+
 
   date2String: function(date) {
     var year = this.formatNumber(date.getFullYear()); //获取完整的年份(4位,1970-????)
@@ -251,7 +310,7 @@ Page({
     return n[1] ? n : '0' + n
   },
 
-  getOneBoxOrders: function(boxId, beginDate, endDate, index) {
+  getOneBoxOrders: function(boxId, beginDate, endDate) {
     var self = this;
     wx.request({
       url: app.globalData.serverIp + 'GetBoxSnackOrderBetweenDate.do',
@@ -266,20 +325,14 @@ Page({
       },
       success: function(res) {
         var orders = res.data.reverse();
-        var ordersConverge = self.convergeOrder(orders);
-        var temp = 'orders[' + index + '][1]';
+        var ordersConverge = self.convergeOrder(orders); //聚合orders
+        orders = self.processOrders(orders); //处理时间及其openid
+        var temp0 = 'orders[0]';
+        var temp1 = 'orders[1]';
         self.setData({
-          [temp]: ordersConverge
+          [temp0]: orders,
+          [temp1]: ordersConverge
         })
-
-
-        orders = self.processOrders(orders);
-        temp = 'orders[' + index + '][0]';
-        self.setData({
-          [temp]: orders
-        })
-        console.log(orders);
-        console.log(ordersConverge);
 
         wx.stopPullDownRefresh();
       },
@@ -288,7 +341,7 @@ Page({
       }
     })
   },
- 
+
   convergeOrder: function(orders) {
     var ordersMap = new Map();
     var ordersConverge = [];
@@ -337,15 +390,7 @@ Page({
       temp[i].orderDateDay = self.getDayFromDate(temp[i].orderTime);
       temp[i].orderDateTime = self.getTimeFromDate(temp[i].orderTime).substr(0, 5);
       temp[i].openid = '**' + temp[i].openid.substr(temp[i].openid.length - 6);
-
-
-      // //当数组长度超过60可能会引发setData报错
-      // if (i > 50) {
-      //   temp[i].goodPic = '/image/snack/food.png';
-      // }
-
     }
-
     return temp;
   },
 

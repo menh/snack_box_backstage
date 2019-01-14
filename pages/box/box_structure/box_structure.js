@@ -13,7 +13,6 @@ Page({
     getInterfaceName: '',
     setInterfaceName: '',
     boxId: '',
-    structId: '',
   },
 
   /**
@@ -128,15 +127,12 @@ Page({
         // console.log(res.data);
         var structs = res.data;
         // var structs = [{
-        //   structId: 'S00000000',
         //   goodId: "G00000001",
         //   goodNum: '1'
         // }, {
-        //   structId: 'S00000000',
         //   goodId: "G00000002",
         //   goodNum: '3'
         // }, {
-        //   structId: 'S00000000',
         //   goodId: "G00000021",
         //   goodNum: '2'
         // }, ];
@@ -156,7 +152,6 @@ Page({
 
 
   processCommodityData: function(self, category, structs) {
-    self.data.structId = structs[0].structId;
     var structsMap = new Map();
     for(var i = 0; i < structs.length; i++){
       structsMap.set(structs[i].goodId,structs[i]);
@@ -175,7 +170,6 @@ Page({
 
     console.log(category);
     console.log(structs);
-    console.log(self.data.structId)
 
     self.setData({
       category: category
@@ -216,7 +210,7 @@ Page({
       success: function(res) {
         if (res.confirm) {
           console.log('用户点击确定');
-          self.setStructure(self, self.data.boxId, self.data.category, self.data.setInterfaceName,self.data.structId);
+          self.setStructure(self, self.data.boxId, self.data.category, self.data.setInterfaceName);
         } else if (res.cancel) {
           console.log('用户点击取消');
         }
@@ -227,15 +221,19 @@ Page({
 
   },
 
-  setStructure: function(self, boxId, category, interfaceName,structId) {
-    var structsJson = JSON.stringify(self.getStructsByCategory(category, structId));
-    console.log(structsJson);
+  setStructure: function(self, boxId, category, interfaceName) {
+    var goodStructDetail = self.getStructsByCategory(category);
+    var boxId = self.data.boxId;
+    console.log("goodStructDetail:",goodStructDetail)
     wx.showLoading({
       title: '',
     })
     wx.request({
       url: app.globalData.serverIp + interfaceName + '.do',
-      data: structsJson,
+      data: {
+        boxId: boxId,
+        goodStructDetail: goodStructDetail
+      },
       method: 'POST',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -244,7 +242,8 @@ Page({
         console.log(res.data);
         wx.hideLoading();
         self.setData({
-          isEdit: false
+          isEdit: false,
+          category:[]
         });
         wx.startPullDownRefresh({})
       },
@@ -312,22 +311,19 @@ Page({
     }
   },
 
-  getStructsByCategory: function(category,structId) {
-    var structs = [];
+  getStructsByCategory: function(category) {
+    var detail = '';
     for (var i = 0; i < category.length; i++) {
       var item = category[i].categoryItem;
       for (var j = 0; j < item.length; j++) {
-        if (item[j].commodityNum > 0) {
-          var structItem = {};
-          structItem.structId = structId;
-          structItem.goodId = item[j].goodId;
-          structItem.goodNum = '' + item[j].commodityNum
-          structs.push(structItem)
+        var good = item[j];
+        if (good.commodityNum > 0) {
+          detail += 'goodId:' + good.goodId + '&num:' + good.commodityNum + '|'
         }
       }
     }
-    // console.log(structItem);
-
-    return structs;
+    detail = detail.substr(0, detail.length - 1);
+    console.log(detail);
+    return detail;
   }
 })

@@ -22,7 +22,7 @@
       </view>
     </view> -->
     <view class='page-title-opera'>
-      <view class='page-title-opera-class' data-url='/pages/box/box_structure/box_structure?getInterfaceName=SelDefaultGoodStructDetail&setInterfaceName=UpdGoodStructDetail&boxId=000000' bindtap='bindtapNavigate'>
+      <view class='page-title-opera-class' data-url='/pages/box/box_structure/box_structure?getInterfaceName=SelDefaultGoodStructDetail&setInterfaceName=UpdBoxDefaultGoodStructDetail&boxId=000000' bindtap='bindtapNavigate'>
         <image class='page-title-opera-class-image' style='width:55rpx' src='/image/refreshCommodity.png' />
         <view class='page-title-opera-class-title'>修改默认商品结构</view>
       </view>

@@ -7,7 +7,11 @@ page {
   border-radius: 0rpx;
   margin-bottom: 8rpx;
 }
-
+.box-snack-right-checkbox{
+  margin-left: 25rpx;
+  margin-right: 0rpx;
+  zoom:80%
+}
 .memo{
   width: 100%;
   margin-top: 15rpx;

@@ -70,12 +70,12 @@
  -->
 
 
-      <view class='page-title-opera-class' data-url='/pages/box/box_structure/box_structure?getInterfaceName=SelGoodStructByBoxId&setInterfaceName=UpdGoodStructDetail&boxId={{box.boxId}}' bindtap='bindtapNavigate'>
-        <image class='page-title-opera-class-image'style='width:55rpx' src='/image/refreshCommodity.png' />
-        <view class='page-title-opera-class-title'>修改盒子商品</view>
+      <view class='page-title-opera-class' data-url='/pages/box/box_structure/box_structure?getInterfaceName=SelGoodStructByBoxId&setInterfaceName=UpdBoxGoodStructDetail&boxId={{box.boxId}}' bindtap='bindtapNavigate'>
+        <image class='page-title-opera-class-image' style='width:55rpx' src='/image/refreshCommodity.png' />
+        <view class='page-title-opera-class-title'>当前商品</view>
       </view>
       <view class='page-title-opera-class' data-url='/pages/box/box_edit/box_edit?isEdit=true&boxId={{box.boxId}}'>
-        <image class='page-title-opera-class-image'style='width:55rpx'  src='/image/refreshVisitTime.png' />
+        <image class='page-title-opera-class-image' style='width:55rpx' src='/image/refreshVisitTime.png' />
         <view class='page-title-opera-class-title'>刷新回访时间</view>
       </view>
       <view class='page-title-opera-class' data-url='/pages/box/box_edit/box_edit?isEdit=true&boxId={{box.boxId}}' bindtap='bindtapNavigate'>
@@ -83,34 +83,33 @@
         <view class='page-title-opera-class-title'>编辑盒子</view>
       </view>
       <view class='page-title-opera-class' bindtap='delBox'>
-        <image class='page-title-opera-class-image'style='width:40rpx'  src='/image/del.png' />
+        <image class='page-title-opera-class-image' style='width:40rpx' src='/image/del.png' />
         <view class='page-title-opera-class-title'>删除盒子</view>
       </view>
     </view>
 
 
     <view class='page-title-opera'>
-      <view class='page-title-opera-class' data-url='/pages/box/box_edit/box_edit?isEdit=true&boxId={{box.boxId}}' bindtap='bindtapNavigate'>
-        <image class='page-title-opera-class-image'  src='/image/openBox2.png' />
-        <view class='page-title-opera-class-title'>配货</view>
+      <view class='page-title-opera-class' data-url='/pages/box/box_structure/box_structure?getInterfaceName=SelNextGoodStructDetail&setInterfaceName=UpdBoxNextGoodStructDetail&boxId={{box.boxId}}' bindtap='bindtapNavigate'>
+        <image class='page-title-opera-class-image' src='/image/openBox2.png' />
+        <view class='page-title-opera-class-title'>配货商品</view>
       </view>
       <view class='page-title-opera-class' data-url='/pages/box/box_edit/box_edit?isEdit=true&boxId={{box.boxId}}' bindtap='bindtapNavigate'>
         <image class='page-title-opera-class-image' src='/image/call.png' />
         <view class='page-title-opera-class-title'>呼叫</view>
       </view>
       <view class='page-title-opera-class' bindtap='delBox'>
-        <image class='page-title-opera-class-image' style='width:55rpx'  src='/image/box2.png' />
+        <image class='page-title-opera-class-image' style='width:55rpx' src='/image/box2.png' />
         <view class='page-title-opera-class-title'>完成补货</view>
       </view>
     </view>
 
 
-    <view class='info-choice'>
+    <view class='info-choice' style='width:340rpx'>
       <view class="info-choice-content{{ordersIndex === 0 ? '-choose':''}}" data-index="0" catchtap='chooseOrders'>本期订单</view>
-      <view class="info-choice-content{{ordersIndex === 1 ? '-choose':''}}" data-index="1" catchtap='chooseOrders'>十五订单</view>
-      <view class="info-choice-content{{ordersIndex === 2 ? '-choose':''}}" data-index="2" catchtap='chooseOrders'>三十订单</view>
+      <view class="info-choice-content{{ordersIndex === 1 ? '-choose':''}}" data-index="1" catchtap='chooseOrders'>本期库存</view>
     </view>
-    <view class='page-order-item' wx:if="{{ordersType==0}}" wx:for="{{orders[ordersIndex][ordersType]}}" wx:key="{{index}}" catchtap='changeOrdersType'>
+    <view class='page-order-item' wx:if="{{ordersIndex === 0 && ordersType==0}}" wx:for="{{orders[ordersType]}}" wx:key="{{index}}" catchtap='changeOrdersType'>
 
       <image class='page-order-item-img' src='{{item.goodPic}}'></image>
       <view class='page-order-item-property'>
@@ -123,7 +122,7 @@
       </view>
     </view>
 
-    <view class='page-order-item' wx:if="{{ordersType==1}}" wx:for="{{orders[ordersIndex][ordersType]}}" wx:key="{{index}}" catchtap='changeOrdersType'>
+    <view class='page-order-item' wx:if="{{ordersIndex === 0 && ordersType==1}}" wx:for="{{orders[ordersType]}}" wx:key="{{index}}" catchtap='changeOrdersType'>
       <image class='page-order-item-img' src='{{item.goodPic}}'></image>
       <view class='page-order-item-property'>
         <view class='page-order-item-property-main'>{{item.goodName}}</view>
@@ -133,6 +132,29 @@
         <view class='page-order-item-property-main' style='text-align:right;font-weight:bold;font-size:34rpx;'>{{item.sum}}</view>
         <view class='page-order-item-property-defalut' style='text-align:right'>购买数量</view>
       </view>
+    </view>
+
+    <view class='page-order-item' wx:if="{{ordersIndex === 1}}" wx:for="{{structs}}" wx:key="{{index}}">
+
+
+      <image class='page-order-item-img' src='{{item.goodPic}}'></image>
+      <view class='page-order-item-property' style='width:180rpx'>
+        <view class='page-order-item-property-main' style='overflow:hidden;'>{{item.goodName}}</view>
+        <view class='page-order-item-property-defalut'>￥{{item.price}}/{{item.goodUnit}}</view>
+      </view>
+      <view class='page-order-item-property' style='text-align:center;width:105rpx;margin-left:0rpx'>
+        <view class='page-order-item-property-main' style='font-size:34rpx;'>{{item.initGoodNum}}</view>
+        <view class='page-order-item-property-defalut'>初始数量</view>
+      </view>  
+      <view class='page-order-item-property' style='text-align:center;width:105rpx;margin-left:15rpx'>
+        <view class='page-order-item-property-main' style='font-size:34rpx;'>{{item.sellGoodNum}}</view>
+        <view class='page-order-item-property-defalut'>消费数量</view>
+      </view>
+      <view class='page-order-item-property' style='text-align:center;width:105rpx;margin-left:15rpx'>
+        <view class='page-order-item-property-main' style='font-weight:bold;font-size:34rpx;color:#267BD9'>{{item.remainGoodNum}}</view>
+        <view class='page-order-item-property-defalut'>剩余数量</view>
+      </view>
+      <checkbox class='box-snack-right-checkbox'></checkbox>
     </view>
 
 
