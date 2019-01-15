@@ -71,9 +71,9 @@ App({
   },
   globalData: {
     userInfo: null,
-    // serverIp: 'http://localhost:8080/bubee/',
+     serverIp: 'http://localhost:8080/bubee/',
     // serverIp: 'http://203.195.196.254/snack_box_http/',
-    serverIp:'https://www.gzfjcyd.com/snack_box_backstage/',
+    //serverIp:'https://www.gzfjcyd.com/snack_box_backstage/',
     // serverIp:'https://www.gzfjcyd.com/snack_box_http/',
     openid: '',
     customerId: '',

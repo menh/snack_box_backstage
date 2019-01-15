@@ -235,8 +235,10 @@ Page({
         goodStructDetail: goodStructDetail
       },
       method: 'POST',
-      "Content-Type": "applciation/json",
-      
+      //"Content-Type": "applciation/json",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
       success: function(res) {
         console.log(res.data);
         wx.hideLoading();
